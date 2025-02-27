@@ -52,8 +52,18 @@ set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_symbol
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_signal_integrity
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_boundary_scan
+set_global_assignment -name VHDL_FILE Register.vhd
+set_global_assignment -name VHDL_FILE Full_adder.vhd
+set_global_assignment -name VHDL_FILE FFD.vhd
+set_global_assignment -name VHDL_FILE AddSub.vhd
+set_global_assignment -name VHDL_FILE Adder.vhd
 set_global_assignment -name VHDL_FILE RouletteGame.vhd
 set_global_assignment -name VHDL_FILE KeyboardReader.vhd
 set_global_assignment -name VHDL_FILE MUX4.vhd
 set_global_assignment -name VHDL_FILE DEC4.vhd
 set_global_assignment -name VHDL_FILE KeyDecode.vhd
+set_global_assignment -name VHDL_FILE Counter.vhd
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
