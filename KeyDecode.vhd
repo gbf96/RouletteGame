@@ -5,62 +5,55 @@ entity KeyDecode is
 	port(
 	LIN: in std_logic_vector(3 downto 0);
 	COL: out std_logic_vector(3 downto 0);
-	CLK, Kscan: in std_logic;
+	CLK: in std_logic;
+	Kack: in std_logic;
 	Q: out std_logic_vector(3 downto 0);
-	Kpress: out std_logic
+	Dval: out std_logic
 	);
 end entity;
 
 architecture structural of KeyDecode is 
 
-component MUX4
+component KeyScan
 		port(
-		A: in std_logic_vector(3 downto 0);  
-      S: in std_logic_vector(1 downto 0);  
-      Y: out std_logic
+		LIN: in std_logic_vector(3 downto 0);
+		COL: out std_logic_vector(3 downto 0);
+		CLK,Kscan: in std_logic;
+		Q: out std_logic_vector(3 downto 0);
+		Kpress: out std_logic
 		);
 end component;
 
-component DEC4
+component KeyControl
 		port(
-		S: in std_logic_vector(1 downto 0);  
-      Y: out std_logic_vector(3 downto 0)
+		Kpress: in std_logic;
+		CLK: in std_logic;
+		Kack: in std_logic;
+		Kscan: out std_logic;
+		Kval: out std_logic
 		);
 end component;
 
-component Counter
-		port(
-		PL : in std_logic;
-		CE : in std_logic;
-		CLK : in std_logic;
-		Din : in std_logic_vector(3 downto 0);
-		RESET : in STD_LOGIC;
-		Q   : out std_logic_vector(3 downto 0)
-		);
-end component;
-
-	signal CounterOut: std_logic_vector(3 downto 0);
-
+signal Kpress_sig: std_logic;
+signal Kscan_sig: std_logic;
+    
 begin
 
-MUX4_inst: MUX4 port map(
-A => LIN,
-S => CounterOut(1 downto 0),
-Y => Kpress
+KeyScan_inst: KeyScan port map(
+	LIN => LIN,
+	COL => COL,
+	Q => Q,
+	CLK => CLK,
+	Kscan => Kscan_sig,
+	Kpress => Kpress_sig
 );
 
-DEC4_inst: DEC4 port map(
-S => ???,
-Y => COL
+KeyControl_inst: KeyControl port map(
+	Kpress => Kpress_sig,
+	CLK => CLK,
+   Kack   => Kack,
+	Kscan => Kscan_sig,
+	Kval => Dval
 );
-
-Counter_inst: Counter port map(
-PL => '0',
-CE => Kscan,
-CLK => CLK,
-Din => "0000",
-RESET => CounterOut(3 downto 2),
-Q => CounterOut
-); 
 
 end structural;

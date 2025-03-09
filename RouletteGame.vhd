@@ -7,6 +7,7 @@ entity RouletteGame is
 	LIN: in std_logic_vector(3 downto 0);
 	COL: out std_logic_vector(3 downto 0);
 	CLK: in std_logic;
+	ACK: in std_logic;
 	Q: out std_logic_vector(3 downto 0);
 	Dval: out std_logic
 	);
@@ -19,6 +20,7 @@ component KeyboardReader
 		LIN: in std_logic_vector(3 downto 0);
 		COL: out std_logic_vector(3 downto 0);
 		CLK: in std_logic;
+		ACK: in std_logic;
 		Q: out std_logic_vector(3 downto 0);
 		Dval: out std_logic
 		);
@@ -31,6 +33,7 @@ KeyboardReader_inst: KeyboardReader port map(
 	COL => COL,
 	Q => Q,
 	CLK => CLK,
+	ACK => ACK,
 	Dval => Dval
 );
 
