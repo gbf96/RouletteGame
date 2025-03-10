@@ -7,6 +7,7 @@ entity KeyboardReader is
 	COL: out std_logic_vector(3 downto 0);
 	CLK: in std_logic;
 	ACK: in std_logic;
+	RESET   : in std_logic;
 	Q: out std_logic_vector(3 downto 0);
 	Dval: out std_logic
 	);
@@ -20,6 +21,7 @@ component KeyDecode
 		COL: out std_logic_vector(3 downto 0);
 		CLK: in std_logic;
 		Kack: in std_logic;
+		RESET   : in std_logic;
 		Q: out std_logic_vector(3 downto 0);
 		Kval: out std_logic
 		);
@@ -33,7 +35,8 @@ KeyDecode_inst: KeyDecode port map(
 	Q => Q,
 	CLK => CLK,
 	Kack => ACK,
-	Dval => Kval
+	RESET => RESET,
+	Kval => Dval
 );
 
 end structural;

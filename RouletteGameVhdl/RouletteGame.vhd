@@ -8,6 +8,7 @@ entity RouletteGame is
 	COL: out std_logic_vector(3 downto 0);
 	CLK: in std_logic;
 	ACK: in std_logic;
+	RESET   : in std_logic;
 	Q: out std_logic_vector(3 downto 0);
 	Dval: out std_logic
 	);
@@ -21,6 +22,7 @@ component KeyboardReader
 		COL: out std_logic_vector(3 downto 0);
 		CLK: in std_logic;
 		ACK: in std_logic;
+		RESET   : in std_logic;
 		Q: out std_logic_vector(3 downto 0);
 		Dval: out std_logic
 		);
@@ -34,6 +36,7 @@ KeyboardReader_inst: KeyboardReader port map(
 	Q => Q,
 	CLK => CLK,
 	ACK => ACK,
+	RESET => RESET,
 	Dval => Dval
 );
 

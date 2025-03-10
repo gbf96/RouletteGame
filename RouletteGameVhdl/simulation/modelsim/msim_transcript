@@ -1,0 +1,267 @@
+# Reading C:/intelFPGA_lite/19.1/modelsim_ase/tcl/vsim/pref.tcl
+# do RouletteGame_run_msim_rtl_vhdl.do
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Model Technology ModelSim - Intel FPGA Edition vmap 10.5b Lib Mapping Utility 2016.10 Oct  5 2016
+# vmap work rtl_work 
+# Copying C:/intelFPGA_lite/19.1/modelsim_ase/win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# 
+# vcom -93 -work work {C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/KeyScan.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:45:17 on Mar 10,2025
+# vcom -reportprogress 300 -93 -work work C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/KeyScan.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity KeyScan
+# -- Compiling architecture structural of KeyScan
+# End time: 16:45:18 on Mar 10,2025, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/Register.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:45:18 on Mar 10,2025
+# vcom -reportprogress 300 -93 -work work C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/Register.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity Registo
+# -- Compiling architecture structural of Registo
+# End time: 16:45:18 on Mar 10,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/Full_adder.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:45:18 on Mar 10,2025
+# vcom -reportprogress 300 -93 -work work C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/Full_adder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity Full_adder
+# -- Compiling architecture behavioral of Full_adder
+# End time: 16:45:18 on Mar 10,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/FFD.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:45:18 on Mar 10,2025
+# vcom -reportprogress 300 -93 -work work C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/FFD.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity FFD
+# -- Compiling architecture logicFunction of FFD
+# End time: 16:45:18 on Mar 10,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/AddSub.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:45:18 on Mar 10,2025
+# vcom -reportprogress 300 -93 -work work C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/AddSub.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity AddSub
+# -- Compiling architecture structural of AddSub
+# End time: 16:45:18 on Mar 10,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/Adder.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:45:18 on Mar 10,2025
+# vcom -reportprogress 300 -93 -work work C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/Adder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity Adder
+# -- Compiling architecture structural of Adder
+# End time: 16:45:18 on Mar 10,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/RouletteGame.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:45:18 on Mar 10,2025
+# vcom -reportprogress 300 -93 -work work C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/RouletteGame.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity RouletteGame
+# -- Compiling architecture structural of RouletteGame
+# End time: 16:45:18 on Mar 10,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/KeyboardReader.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:45:18 on Mar 10,2025
+# vcom -reportprogress 300 -93 -work work C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/KeyboardReader.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity KeyboardReader
+# -- Compiling architecture structural of KeyboardReader
+# End time: 16:45:18 on Mar 10,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/MUX4.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:45:18 on Mar 10,2025
+# vcom -reportprogress 300 -93 -work work C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/MUX4.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity MUX4
+# -- Compiling architecture behavioral of MUX4
+# End time: 16:45:19 on Mar 10,2025, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/DEC4.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:45:19 on Mar 10,2025
+# vcom -reportprogress 300 -93 -work work C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/DEC4.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity DEC4
+# -- Compiling architecture behavioral of DEC4
+# End time: 16:45:19 on Mar 10,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/Counter.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:45:19 on Mar 10,2025
+# vcom -reportprogress 300 -93 -work work C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/Counter.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity Counter
+# -- Compiling architecture structural of Counter
+# End time: 16:45:19 on Mar 10,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/KeyControl.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:45:19 on Mar 10,2025
+# vcom -reportprogress 300 -93 -work work C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/KeyControl.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity KeyControl
+# -- Compiling architecture behavioral of KeyControl
+# End time: 16:45:19 on Mar 10,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/KeyDecode.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:45:19 on Mar 10,2025
+# vcom -reportprogress 300 -93 -work work C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/KeyDecode.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity KeyDecode
+# -- Compiling architecture structural of KeyDecode
+# End time: 16:45:19 on Mar 10,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+vcom -reportprogress 300 -work work C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/RouletteGame_tb.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:45:39 on Mar 10,2025
+# vcom -reportprogress 300 -work work C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/RouletteGame_tb.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Compiling entity RouletteGame_tb
+# -- Compiling architecture testbench of RouletteGame_tb
+# End time: 16:45:39 on Mar 10,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim work.roulettegame_tb
+# vsim work.roulettegame_tb 
+# Start time: 16:45:44 on Mar 10,2025
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading work.roulettegame_tb(testbench)
+# Loading work.roulettegame(structural)
+# Loading work.keyboardreader(structural)
+# Loading work.keydecode(structural)
+# Loading work.keyscan(structural)
+# Loading work.mux4(behavioral)
+# Loading work.dec4(behavioral)
+# Loading work.counter(structural)
+# Loading work.addsub(structural)
+# Loading work.adder(structural)
+# Loading work.full_adder(behavioral)
+# Loading work.registo(structural)
+# Loading work.ffd(logicfunction)
+# Loading work.keycontrol(behavioral)
+# ** Warning: (vsim-8683) Uninitialized out port /roulettegame_tb/UUT/KeyboardReader_inst/KeyDecode_inst/KeyScan_inst/Q(3 downto 0) has no driver.
+# This port will contribute value (UUUU) to the signal network.
+add wave -position end  sim:/roulettegame_tb/LIN
+add wave -position end  sim:/roulettegame_tb/COL
+add wave -position end  sim:/roulettegame_tb/CLK
+add wave -position end  sim:/roulettegame_tb/ACK
+add wave -position end  sim:/roulettegame_tb/RESET
+add wave -position end  sim:/roulettegame_tb/Q
+add wave -position end  sim:/roulettegame_tb/Dval
+add wave -position end  sim:/roulettegame_tb/CLK_PERIOD
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+# WARNING: No extended dataflow license exists
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# WARNING: No extended dataflow license exists
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+restart
+# ** Warning: (vsim-8683) Uninitialized out port /roulettegame_tb/UUT/KeyboardReader_inst/KeyDecode_inst/KeyScan_inst/Q(3 downto 0) has no driver.
+# This port will contribute value (UUUU) to the signal network.
+run
+run
+run
+restart
+# ** Warning: (vsim-8683) Uninitialized out port /roulettegame_tb/UUT/KeyboardReader_inst/KeyDecode_inst/KeyScan_inst/Q(3 downto 0) has no driver.
+# This port will contribute value (UUUU) to the signal network.
+run
+run
+run
+run
+# End time: 17:09:00 on Mar 10,2025, Elapsed time: 0:23:16
+# Errors: 18, Warnings: 5

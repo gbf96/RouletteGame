@@ -22,6 +22,7 @@ object HAL {
     fun writeBits(mask: Int, value: Int) {
         usbPort = usbPort and (mask.inv())
         usbPort = usbPort or (mask and value)
+        UsbPort.write(usbPort)
     }
 
     // Coloca os bits representados por mask no valor lógico ’1’

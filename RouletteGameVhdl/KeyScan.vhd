@@ -7,6 +7,7 @@ entity KeyScan is
 	COL: out std_logic_vector(3 downto 0);
 	CLK, Kscan: in std_logic;
 	Q: out std_logic_vector(3 downto 0);
+	RESET   : in std_logic;
 	Kpress: out std_logic
 	);
 end entity;
@@ -59,7 +60,7 @@ PL => '0',
 CE => Kscan,
 CLK => CLK,
 Din => "0000",
-RESET => ???,
+RESET => RESET,
 Q => CounterOut
 ); 
 

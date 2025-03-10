@@ -1,0 +1,290 @@
+|RouletteGame
+LIN[0] => KeyboardReader:KeyboardReader_inst.LIN[0]
+LIN[1] => KeyboardReader:KeyboardReader_inst.LIN[1]
+LIN[2] => KeyboardReader:KeyboardReader_inst.LIN[2]
+LIN[3] => KeyboardReader:KeyboardReader_inst.LIN[3]
+COL[0] << KeyboardReader:KeyboardReader_inst.COL[0]
+COL[1] << KeyboardReader:KeyboardReader_inst.COL[1]
+COL[2] << KeyboardReader:KeyboardReader_inst.COL[2]
+COL[3] << KeyboardReader:KeyboardReader_inst.COL[3]
+CLK => KeyboardReader:KeyboardReader_inst.CLK
+ACK => KeyboardReader:KeyboardReader_inst.ACK
+RESET => KeyboardReader:KeyboardReader_inst.RESET
+Q[0] << KeyboardReader:KeyboardReader_inst.Q[0]
+Q[1] << KeyboardReader:KeyboardReader_inst.Q[1]
+Q[2] << KeyboardReader:KeyboardReader_inst.Q[2]
+Q[3] << KeyboardReader:KeyboardReader_inst.Q[3]
+Dval << KeyboardReader:KeyboardReader_inst.Dval
+
+
+|RouletteGame|KeyboardReader:KeyboardReader_inst
+LIN[0] => KeyDecode:KeyDecode_inst.LIN[0]
+LIN[1] => KeyDecode:KeyDecode_inst.LIN[1]
+LIN[2] => KeyDecode:KeyDecode_inst.LIN[2]
+LIN[3] => KeyDecode:KeyDecode_inst.LIN[3]
+COL[0] <= KeyDecode:KeyDecode_inst.COL[0]
+COL[1] <= KeyDecode:KeyDecode_inst.COL[1]
+COL[2] <= KeyDecode:KeyDecode_inst.COL[2]
+COL[3] <= KeyDecode:KeyDecode_inst.COL[3]
+CLK => KeyDecode:KeyDecode_inst.CLK
+ACK => KeyDecode:KeyDecode_inst.Kack
+RESET => KeyDecode:KeyDecode_inst.RESET
+Q[0] <= KeyDecode:KeyDecode_inst.Q[0]
+Q[1] <= KeyDecode:KeyDecode_inst.Q[1]
+Q[2] <= KeyDecode:KeyDecode_inst.Q[2]
+Q[3] <= KeyDecode:KeyDecode_inst.Q[3]
+Dval <= KeyDecode:KeyDecode_inst.Kval
+
+
+|RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst
+LIN[0] => KeyScan:KeyScan_inst.LIN[0]
+LIN[1] => KeyScan:KeyScan_inst.LIN[1]
+LIN[2] => KeyScan:KeyScan_inst.LIN[2]
+LIN[3] => KeyScan:KeyScan_inst.LIN[3]
+COL[0] <= KeyScan:KeyScan_inst.COL[0]
+COL[1] <= KeyScan:KeyScan_inst.COL[1]
+COL[2] <= KeyScan:KeyScan_inst.COL[2]
+COL[3] <= KeyScan:KeyScan_inst.COL[3]
+CLK => KeyScan:KeyScan_inst.CLK
+CLK => KeyControl:KeyControl_inst.CLK
+Kack => KeyControl:KeyControl_inst.Kack
+RESET => KeyScan:KeyScan_inst.RESET
+RESET => KeyControl:KeyControl_inst.RESET
+Q[0] <= KeyScan:KeyScan_inst.Q[0]
+Q[1] <= KeyScan:KeyScan_inst.Q[1]
+Q[2] <= KeyScan:KeyScan_inst.Q[2]
+Q[3] <= KeyScan:KeyScan_inst.Q[3]
+Kval <= KeyControl:KeyControl_inst.Kval
+
+
+|RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst
+LIN[0] => MUX4:MUX4_inst.A[0]
+LIN[1] => MUX4:MUX4_inst.A[1]
+LIN[2] => MUX4:MUX4_inst.A[2]
+LIN[3] => MUX4:MUX4_inst.A[3]
+COL[0] <= DEC4:DEC4_inst.Y[0]
+COL[1] <= DEC4:DEC4_inst.Y[1]
+COL[2] <= DEC4:DEC4_inst.Y[2]
+COL[3] <= DEC4:DEC4_inst.Y[3]
+CLK => Counter:Counter_inst.CLK
+Kscan => Counter:Counter_inst.CE
+Q[0] <= comb.DB_MAX_OUTPUT_PORT_TYPE
+Q[1] <= Q[1].DB_MAX_OUTPUT_PORT_TYPE
+Q[2] <= Q[2].DB_MAX_OUTPUT_PORT_TYPE
+Q[3] <= Q[3].DB_MAX_OUTPUT_PORT_TYPE
+RESET => Counter:Counter_inst.RESET
+Kpress <= MUX4:MUX4_inst.Y
+
+
+|RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|MUX4:MUX4_inst
+A[0] => Y.IN0
+A[1] => Y.IN0
+A[2] => Y.IN0
+A[3] => Y.IN0
+S[0] => Y.IN1
+S[0] => Y.IN1
+S[0] => Y.IN1
+S[0] => Y.IN1
+S[1] => Y.IN1
+S[1] => Y.IN1
+S[1] => Y.IN1
+S[1] => Y.IN1
+Y <= Y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|DEC4:DEC4_inst
+S[0] => Y.IN0
+S[0] => Y.IN0
+S[0] => Y.IN0
+S[0] => Y.IN0
+S[1] => Y.IN1
+S[1] => Y.IN1
+S[1] => Y.IN1
+S[1] => Y.IN1
+Y[0] <= Y.DB_MAX_OUTPUT_PORT_TYPE
+Y[1] <= Y.DB_MAX_OUTPUT_PORT_TYPE
+Y[2] <= Y.DB_MAX_OUTPUT_PORT_TYPE
+Y[3] <= Y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst
+PL => outputPL.IN0
+PL => outputPL.IN0
+PL => outputPL.IN0
+PL => outputPL.IN0
+PL => outputPL.IN1
+PL => outputPL.IN1
+PL => outputPL.IN1
+PL => outputPL.IN1
+CE => AddSub:AddSub1.CBi
+CLK => Registo:Registo1.CLK
+Din[0] => outputPL.IN1
+Din[1] => outputPL.IN1
+Din[2] => outputPL.IN1
+Din[3] => outputPL.IN1
+RESET => Registo:Registo1.RESET
+Q[0] <= Registo:Registo1.Q[0]
+Q[1] <= Registo:Registo1.Q[1]
+Q[2] <= Registo:Registo1.Q[2]
+Q[3] <= Registo:Registo1.Q[3]
+
+
+|RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|AddSub:AddSub1
+A[0] => Adder:Adder1.A[0]
+A[1] => Adder:Adder1.A[1]
+A[2] => Adder:Adder1.A[2]
+A[3] => Adder:Adder1.A[3]
+B[0] => B_modified[0].IN0
+B[1] => B_modified[1].IN0
+B[2] => B_modified[2].IN0
+B[3] => B_modified[3].IN0
+CBi => C_modified.IN0
+OPau => B_modified[3].IN1
+OPau => B_modified[2].IN1
+OPau => B_modified[1].IN1
+OPau => B_modified[0].IN1
+OPau => C_modified.IN1
+OPau => CBo.IN1
+CBo <= CBo.DB_MAX_OUTPUT_PORT_TYPE
+S[0] <= Adder:Adder1.S[0]
+S[1] <= Adder:Adder1.S[1]
+S[2] <= Adder:Adder1.S[2]
+S[3] <= Adder:Adder1.S[3]
+
+
+|RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|AddSub:AddSub1|Adder:Adder1
+A[0] => Full_adder:FA0.A
+A[1] => Full_adder:FA1.A
+A[2] => Full_adder:FA2.A
+A[3] => Full_adder:FA3.A
+B[0] => Full_adder:FA0.B
+B[1] => Full_adder:FA1.B
+B[2] => Full_adder:FA2.B
+B[3] => Full_adder:FA3.B
+C0 => Full_adder:FA0.Cin
+C4 <= Full_adder:FA3.Cout
+S[0] <= Full_adder:FA0.S
+S[1] <= Full_adder:FA1.S
+S[2] <= Full_adder:FA2.S
+S[3] <= Full_adder:FA3.S
+
+
+|RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|AddSub:AddSub1|Adder:Adder1|Full_adder:FA0
+A => S.IN0
+A => Cout.IN0
+B => S.IN1
+B => Cout.IN1
+Cin => S.IN1
+Cin => Cout.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|AddSub:AddSub1|Adder:Adder1|Full_adder:FA1
+A => S.IN0
+A => Cout.IN0
+B => S.IN1
+B => Cout.IN1
+Cin => S.IN1
+Cin => Cout.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|AddSub:AddSub1|Adder:Adder1|Full_adder:FA2
+A => S.IN0
+A => Cout.IN0
+B => S.IN1
+B => Cout.IN1
+Cin => S.IN1
+Cin => Cout.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|AddSub:AddSub1|Adder:Adder1|Full_adder:FA3
+A => S.IN0
+A => Cout.IN0
+B => S.IN1
+B => Cout.IN1
+Cin => S.IN1
+Cin => Cout.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|Registo:Registo1
+CLK => FFD:FFD0.CLK
+CLK => FFD:FFD1.CLK
+CLK => FFD:FFD2.CLK
+CLK => FFD:FFD3.CLK
+D[0] => FFD:FFD0.D
+D[1] => FFD:FFD1.D
+D[2] => FFD:FFD2.D
+D[3] => FFD:FFD3.D
+RESET => FFD:FFD0.RESET
+RESET => FFD:FFD1.RESET
+RESET => FFD:FFD2.RESET
+RESET => FFD:FFD3.RESET
+Q[0] <= FFD:FFD0.Q
+Q[1] <= FFD:FFD1.Q
+Q[2] <= FFD:FFD2.Q
+Q[3] <= FFD:FFD3.Q
+
+
+|RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|Registo:Registo1|FFD:FFD0
+CLK => Q~reg0.CLK
+RESET => Q~reg0.ACLR
+RESET => Q.IN0
+SET => Q.IN1
+D => Q~reg0.DATAIN
+EN => Q~reg0.ENA
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|Registo:Registo1|FFD:FFD1
+CLK => Q~reg0.CLK
+RESET => Q~reg0.ACLR
+RESET => Q.IN0
+SET => Q.IN1
+D => Q~reg0.DATAIN
+EN => Q~reg0.ENA
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|Registo:Registo1|FFD:FFD2
+CLK => Q~reg0.CLK
+RESET => Q~reg0.ACLR
+RESET => Q.IN0
+SET => Q.IN1
+D => Q~reg0.DATAIN
+EN => Q~reg0.ENA
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|Registo:Registo1|FFD:FFD3
+CLK => Q~reg0.CLK
+RESET => Q~reg0.ACLR
+RESET => Q.IN0
+SET => Q.IN1
+D => Q~reg0.DATAIN
+EN => Q~reg0.ENA
+Q <= Q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyControl:KeyControl_inst
+Kpress => NextState.OUTPUTSELECT
+Kpress => NextState.OUTPUTSELECT
+Kpress => NextState.STATE_PROCESS.DATAA
+Kpress => Kscan.IN0
+Kpress => Selector0.IN2
+Kpress => GenerateNextState.IN0
+CLK => CurrentState~1.DATAIN
+Kack => GenerateNextState.IN1
+Kack => Selector1.IN2
+Kack => NextState.STATE_PROCESS.DATAB
+RESET => CurrentState~3.DATAIN
+Kscan <= Kscan.DB_MAX_OUTPUT_PORT_TYPE
+Kval <= Kval.DB_MAX_OUTPUT_PORT_TYPE
+
+

@@ -1,0 +1,452 @@
+Analysis & Synthesis report for RouletteGame
+Mon Mar 10 16:43:49 2025
+Quartus Prime Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. State Machine - |RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyControl:KeyControl_inst|CurrentState
+  9. General Register Statistics
+ 10. Port Connectivity Checks: "KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|Registo:Registo1|FFD:FFD3"
+ 11. Port Connectivity Checks: "KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|Registo:Registo1|FFD:FFD2"
+ 12. Port Connectivity Checks: "KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|Registo:Registo1|FFD:FFD1"
+ 13. Port Connectivity Checks: "KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|Registo:Registo1|FFD:FFD0"
+ 14. Port Connectivity Checks: "KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|AddSub:AddSub1"
+ 15. Port Connectivity Checks: "KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst"
+ 16. Post-Synthesis Netlist Statistics for Top Partition
+ 17. Elapsed Time Per Partition
+ 18. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2019  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+
+
+
++----------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                     ;
++------------------------------------+---------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Mon Mar 10 16:43:49 2025       ;
+; Quartus Prime Version              ; 19.1.0 Build 670 09/22/2019 SJ Lite Edition ;
+; Revision Name                      ; RouletteGame                                ;
+; Top-level Entity Name              ; RouletteGame                                ;
+; Family                             ; MAX 10                                      ;
+; Total logic elements               ; 15                                          ;
+;     Total combinational functions  ; 15                                          ;
+;     Dedicated logic registers      ; 7                                           ;
+; Total registers                    ; 7                                           ;
+; Total pins                         ; 16                                          ;
+; Total virtual pins                 ; 0                                           ;
+; Total memory bits                  ; 0                                           ;
+; Embedded Multiplier 9-bit elements ; 0                                           ;
+; Total PLLs                         ; 0                                           ;
+; UFM blocks                         ; 0                                           ;
+; ADC blocks                         ; 0                                           ;
++------------------------------------+---------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                              ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                           ; Setting            ; Default Value      ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                           ; 10M50DAF484C6GES   ;                    ;
+; Top-level entity name                                            ; RouletteGame       ; RouletteGame       ;
+; Family name                                                      ; MAX 10             ; Cyclone V          ;
+; Use smart compilation                                            ; Off                ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                      ; Off                ; Off                ;
+; Restructure Multiplexers                                         ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                              ; Off                ; Off                ;
+; Preserve fewer node names                                        ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                    ; Enable             ; Enable             ;
+; Verilog Version                                                  ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                     ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                         ; Auto               ; Auto               ;
+; Safe State Machine                                               ; Off                ; Off                ;
+; Extract Verilog State Machines                                   ; On                 ; On                 ;
+; Extract VHDL State Machines                                      ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                       ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                   ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                          ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                        ; On                 ; On                 ;
+; Parallel Synthesis                                               ; On                 ; On                 ;
+; DSP Block Balancing                                              ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                               ; On                 ; On                 ;
+; Power-Up Don't Care                                              ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                     ; Off                ; Off                ;
+; Remove Duplicate Registers                                       ; On                 ; On                 ;
+; Ignore CARRY Buffers                                             ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                           ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                            ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                        ; Off                ; Off                ;
+; Ignore LCELL Buffers                                             ; Off                ; Off                ;
+; Ignore SOFT Buffers                                              ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                   ; Off                ; Off                ;
+; Optimization Technique                                           ; Balanced           ; Balanced           ;
+; Carry Chain Length                                               ; 70                 ; 70                 ;
+; Auto Carry Chains                                                ; On                 ; On                 ;
+; Auto Open-Drain Pins                                             ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                            ; Off                ; Off                ;
+; Auto ROM Replacement                                             ; On                 ; On                 ;
+; Auto RAM Replacement                                             ; On                 ; On                 ;
+; Auto DSP Block Replacement                                       ; On                 ; On                 ;
+; Auto Shift Register Replacement                                  ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                  ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                    ; On                 ; On                 ;
+; Strict RAM Replacement                                           ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                           ; Off                ; Off                ;
+; Auto RAM Block Balancing                                         ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                ; Off                ; Off                ;
+; Auto Resource Sharing                                            ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                    ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing              ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                ; Off                ; Off                ;
+; Timing-Driven Synthesis                                          ; On                 ; On                 ;
+; Report Parameter Settings                                        ; On                 ; On                 ;
+; Report Source Assignments                                        ; On                 ; On                 ;
+; Report Connectivity Checks                                       ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                               ; Off                ; Off                ;
+; Synchronization Register Chain Length                            ; 2                  ; 2                  ;
+; Power Optimization During Synthesis                              ; Normal compilation ; Normal compilation ;
+; HDL message level                                                ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                  ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report         ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report               ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report        ; 100                ; 100                ;
+; Clock MUX Protection                                             ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                      ; Off                ; Off                ;
+; Block Design Naming                                              ; Auto               ; Auto               ;
+; SDC constraint protection                                        ; Off                ; Off                ;
+; Synthesis Effort                                                 ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal     ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                             ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                               ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                      ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                           ; On                 ; On                 ;
++------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 16          ;
+; Maximum allowed            ; 12          ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 12          ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processors 2-12        ;   0.0%      ;
++----------------------------+-------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                   ;
++----------------------------------+-----------------+-----------------+-------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                                            ; Library ;
++----------------------------------+-----------------+-----------------+-------------------------------------------------------------------------+---------+
+; KeyScan.vhd                      ; yes             ; User VHDL File  ; C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/KeyScan.vhd        ;         ;
+; Register.vhd                     ; yes             ; User VHDL File  ; C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/Register.vhd       ;         ;
+; Full_adder.vhd                   ; yes             ; User VHDL File  ; C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/Full_adder.vhd     ;         ;
+; FFD.vhd                          ; yes             ; User VHDL File  ; C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/FFD.vhd            ;         ;
+; AddSub.vhd                       ; yes             ; User VHDL File  ; C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/AddSub.vhd         ;         ;
+; Adder.vhd                        ; yes             ; User VHDL File  ; C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/Adder.vhd          ;         ;
+; RouletteGame.vhd                 ; yes             ; User VHDL File  ; C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/RouletteGame.vhd   ;         ;
+; KeyboardReader.vhd               ; yes             ; User VHDL File  ; C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/KeyboardReader.vhd ;         ;
+; MUX4.vhd                         ; yes             ; User VHDL File  ; C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/MUX4.vhd           ;         ;
+; DEC4.vhd                         ; yes             ; User VHDL File  ; C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/DEC4.vhd           ;         ;
+; Counter.vhd                      ; yes             ; User VHDL File  ; C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/Counter.vhd        ;         ;
+; KeyControl.vhd                   ; yes             ; User VHDL File  ; C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/KeyControl.vhd     ;         ;
+; KeyDecode.vhd                    ; yes             ; User VHDL File  ; C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/KeyDecode.vhd      ;         ;
++----------------------------------+-----------------+-----------------+-------------------------------------------------------------------------+---------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                                                                                                       ;
++---------------------------------------------+-----------------------------------------------------------------------------------------------------+
+; Resource                                    ; Usage                                                                                               ;
++---------------------------------------------+-----------------------------------------------------------------------------------------------------+
+; Estimated Total logic elements              ; 15                                                                                                  ;
+;                                             ;                                                                                                     ;
+; Total combinational functions               ; 15                                                                                                  ;
+; Logic element usage by number of LUT inputs ;                                                                                                     ;
+;     -- 4 input functions                    ; 7                                                                                                   ;
+;     -- 3 input functions                    ; 3                                                                                                   ;
+;     -- <=2 input functions                  ; 5                                                                                                   ;
+;                                             ;                                                                                                     ;
+; Logic elements by mode                      ;                                                                                                     ;
+;     -- normal mode                          ; 15                                                                                                  ;
+;     -- arithmetic mode                      ; 0                                                                                                   ;
+;                                             ;                                                                                                     ;
+; Total registers                             ; 7                                                                                                   ;
+;     -- Dedicated logic registers            ; 7                                                                                                   ;
+;     -- I/O registers                        ; 0                                                                                                   ;
+;                                             ;                                                                                                     ;
+; I/O pins                                    ; 16                                                                                                  ;
+;                                             ;                                                                                                     ;
+; Embedded Multiplier 9-bit elements          ; 0                                                                                                   ;
+;                                             ;                                                                                                     ;
+; Maximum fan-out node                        ; KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|MUX4:MUX4_inst|Y~1 ;
+; Maximum fan-out                             ; 7                                                                                                   ;
+; Total fan-out                               ; 89                                                                                                  ;
+; Average fan-out                             ; 1.65                                                                                                ;
++---------------------------------------------+-----------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                                                                           ;
++-----------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+--------------+
+; Compilation Hierarchy Node              ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; UFM Blocks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; ADC blocks ; Full Hierarchy Name                                                                                                                                            ; Entity Name    ; Library Name ;
++-----------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+--------------+
+; |RouletteGame                           ; 15 (0)              ; 7 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 16   ; 0            ; 0          ; |RouletteGame                                                                                                                                                  ; RouletteGame   ; work         ;
+;    |KeyboardReader:KeyboardReader_inst| ; 15 (0)              ; 7 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |RouletteGame|KeyboardReader:KeyboardReader_inst                                                                                                               ; KeyboardReader ; work         ;
+;       |KeyDecode:KeyDecode_inst|        ; 15 (0)              ; 7 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst                                                                                      ; KeyDecode      ; work         ;
+;          |KeyControl:KeyControl_inst|   ; 3 (3)               ; 3 (3)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyControl:KeyControl_inst                                                           ; KeyControl     ; work         ;
+;          |KeyScan:KeyScan_inst|         ; 12 (0)              ; 4 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst                                                                 ; KeyScan        ; work         ;
+;             |Counter:Counter_inst|      ; 6 (0)               ; 4 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst                                            ; Counter        ; work         ;
+;                |AddSub:AddSub1|         ; 1 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|AddSub:AddSub1                             ; AddSub         ; work         ;
+;                   |Adder:Adder1|        ; 1 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|AddSub:AddSub1|Adder:Adder1                ; Adder          ; work         ;
+;                      |Full_adder:FA1|   ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|AddSub:AddSub1|Adder:Adder1|Full_adder:FA1 ; Full_adder     ; work         ;
+;                |Registo:Registo1|       ; 5 (0)               ; 4 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|Registo:Registo1                           ; Registo        ; work         ;
+;                   |FFD:FFD0|            ; 1 (1)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|Registo:Registo1|FFD:FFD0                  ; FFD            ; work         ;
+;                   |FFD:FFD1|            ; 1 (1)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|Registo:Registo1|FFD:FFD1                  ; FFD            ; work         ;
+;                   |FFD:FFD2|            ; 2 (2)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|Registo:Registo1|FFD:FFD2                  ; FFD            ; work         ;
+;                   |FFD:FFD3|            ; 1 (1)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|Registo:Registo1|FFD:FFD3                  ; FFD            ; work         ;
+;             |DEC4:DEC4_inst|            ; 4 (4)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|DEC4:DEC4_inst                                                  ; DEC4           ; work         ;
+;             |MUX4:MUX4_inst|            ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|MUX4:MUX4_inst                                                  ; MUX4           ; work         ;
++-----------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyControl:KeyControl_inst|CurrentState ;
++----------------------------+-------------------------+----------------------------+-----------------------------------------------+
+; Name                       ; CurrentState.STATE_WAIT ; CurrentState.STATE_PROCESS ; CurrentState.STATE_SCAN                       ;
++----------------------------+-------------------------+----------------------------+-----------------------------------------------+
+; CurrentState.STATE_SCAN    ; 0                       ; 0                          ; 0                                             ;
+; CurrentState.STATE_PROCESS ; 0                       ; 1                          ; 1                                             ;
+; CurrentState.STATE_WAIT    ; 1                       ; 0                          ; 1                                             ;
++----------------------------+-------------------------+----------------------------+-----------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 7     ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 7     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|Registo:Registo1|FFD:FFD3" ;
++------+-------+----------+-----------------------------------------------------------------------------------------------------------------------------------+
+; Port ; Type  ; Severity ; Details                                                                                                                           ;
++------+-------+----------+-----------------------------------------------------------------------------------------------------------------------------------+
+; set  ; Input ; Info     ; Stuck at GND                                                                                                                      ;
+; en   ; Input ; Info     ; Stuck at VCC                                                                                                                      ;
++------+-------+----------+-----------------------------------------------------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|Registo:Registo1|FFD:FFD2" ;
++------+-------+----------+-----------------------------------------------------------------------------------------------------------------------------------+
+; Port ; Type  ; Severity ; Details                                                                                                                           ;
++------+-------+----------+-----------------------------------------------------------------------------------------------------------------------------------+
+; set  ; Input ; Info     ; Stuck at GND                                                                                                                      ;
+; en   ; Input ; Info     ; Stuck at VCC                                                                                                                      ;
++------+-------+----------+-----------------------------------------------------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|Registo:Registo1|FFD:FFD1" ;
++------+-------+----------+-----------------------------------------------------------------------------------------------------------------------------------+
+; Port ; Type  ; Severity ; Details                                                                                                                           ;
++------+-------+----------+-----------------------------------------------------------------------------------------------------------------------------------+
+; set  ; Input ; Info     ; Stuck at GND                                                                                                                      ;
+; en   ; Input ; Info     ; Stuck at VCC                                                                                                                      ;
++------+-------+----------+-----------------------------------------------------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|Registo:Registo1|FFD:FFD0" ;
++------+-------+----------+-----------------------------------------------------------------------------------------------------------------------------------+
+; Port ; Type  ; Severity ; Details                                                                                                                           ;
++------+-------+----------+-----------------------------------------------------------------------------------------------------------------------------------+
+; set  ; Input ; Info     ; Stuck at GND                                                                                                                      ;
+; en   ; Input ; Info     ; Stuck at VCC                                                                                                                      ;
++------+-------+----------+-----------------------------------------------------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|AddSub:AddSub1" ;
++------+--------+----------+-----------------------------------------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                                                               ;
++------+--------+----------+-----------------------------------------------------------------------------------------------------------------------+
+; b    ; Input  ; Info     ; Stuck at GND                                                                                                          ;
+; opau ; Input  ; Info     ; Stuck at GND                                                                                                          ;
+; cbo  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                   ;
++------+--------+----------+-----------------------------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst" ;
++------+-------+----------+---------------------------------------------------------------------------------------------------------+
+; Port ; Type  ; Severity ; Details                                                                                                 ;
++------+-------+----------+---------------------------------------------------------------------------------------------------------+
+; pl   ; Input ; Info     ; Stuck at GND                                                                                            ;
+; din  ; Input ; Info     ; Stuck at GND                                                                                            ;
++------+-------+----------+---------------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; boundary_port         ; 16                          ;
+; cycloneiii_ff         ; 7                           ;
+;     CLR               ; 7                           ;
+; cycloneiii_lcell_comb ; 19                          ;
+;     normal            ; 19                          ;
+;         0 data inputs ; 1                           ;
+;         1 data inputs ; 3                           ;
+;         2 data inputs ; 5                           ;
+;         3 data inputs ; 3                           ;
+;         4 data inputs ; 7                           ;
+;                       ;                             ;
+; Max LUT depth         ; 4.00                        ;
+; Average LUT depth     ; 2.42                        ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:00     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition
+    Info: Processing started: Mon Mar 10 16:43:39 2025
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off RouletteGame -c RouletteGame
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 12 of the 12 processors detected
+Info (12021): Found 2 design units, including 1 entities, in source file keyscan.vhd
+    Info (12022): Found design unit 1: KeyScan-structural File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/KeyScan.vhd Line: 15
+    Info (12023): Found entity 1: KeyScan File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/KeyScan.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file register.vhd
+    Info (12022): Found design unit 1: Registo-structural File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/Register.vhd Line: 13
+    Info (12023): Found entity 1: Registo File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/Register.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file full_adder.vhd
+    Info (12022): Found design unit 1: Full_adder-behavioral File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/Full_adder.vhd Line: 14
+    Info (12023): Found entity 1: Full_adder File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/Full_adder.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file ffd.vhd
+    Info (12022): Found design unit 1: FFD-logicFunction File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/FFD.vhd Line: 14
+    Info (12023): Found entity 1: FFD File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/FFD.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file addsub.vhd
+    Info (12022): Found design unit 1: AddSub-structural File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/AddSub.vhd Line: 14
+    Info (12023): Found entity 1: AddSub File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/AddSub.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file adder.vhd
+    Info (12022): Found design unit 1: Adder-structural File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/Adder.vhd Line: 13
+    Info (12023): Found entity 1: Adder File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/Adder.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file roulettegame.vhd
+    Info (12022): Found design unit 1: RouletteGame-structural File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/RouletteGame.vhd Line: 17
+    Info (12023): Found entity 1: RouletteGame File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/RouletteGame.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file keyboardreader.vhd
+    Info (12022): Found design unit 1: KeyboardReader-structural File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/KeyboardReader.vhd Line: 16
+    Info (12023): Found entity 1: KeyboardReader File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/KeyboardReader.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file mux4.vhd
+    Info (12022): Found design unit 1: MUX4-behavioral File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/MUX4.vhd Line: 12
+    Info (12023): Found entity 1: MUX4 File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/MUX4.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file dec4.vhd
+    Info (12022): Found design unit 1: DEC4-behavioral File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/DEC4.vhd Line: 11
+    Info (12023): Found entity 1: DEC4 File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/DEC4.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file counter.vhd
+    Info (12022): Found design unit 1: Counter-structural File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/Counter.vhd Line: 15
+    Info (12023): Found entity 1: Counter File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/Counter.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file keycontrol.vhd
+    Info (12022): Found design unit 1: KeyControl-behavioral File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/KeyControl.vhd Line: 15
+    Info (12023): Found entity 1: KeyControl File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/KeyControl.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file keydecode.vhd
+    Info (12022): Found design unit 1: KeyDecode-structural File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/KeyDecode.vhd Line: 16
+    Info (12023): Found entity 1: KeyDecode File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/KeyDecode.vhd Line: 4
+Info (12127): Elaborating entity "RouletteGame" for the top level hierarchy
+Info (12128): Elaborating entity "KeyboardReader" for hierarchy "KeyboardReader:KeyboardReader_inst" File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/RouletteGame.vhd Line: 33
+Info (12128): Elaborating entity "KeyDecode" for hierarchy "KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst" File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/KeyboardReader.vhd Line: 32
+Info (12128): Elaborating entity "KeyScan" for hierarchy "KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst" File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/KeyDecode.vhd Line: 45
+Warning (10541): VHDL Signal Declaration warning at KeyScan.vhd(9): used implicit default value for signal "Q" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/KeyScan.vhd Line: 9
+Info (12128): Elaborating entity "MUX4" for hierarchy "KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|MUX4:MUX4_inst" File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/KeyScan.vhd Line: 47
+Info (12128): Elaborating entity "DEC4" for hierarchy "KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|DEC4:DEC4_inst" File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/KeyScan.vhd Line: 53
+Info (12128): Elaborating entity "Counter" for hierarchy "KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst" File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/KeyScan.vhd Line: 58
+Info (12128): Elaborating entity "AddSub" for hierarchy "KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|AddSub:AddSub1" File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/Counter.vhd Line: 46
+Info (12128): Elaborating entity "Adder" for hierarchy "KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|AddSub:AddSub1|Adder:Adder1" File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/AddSub.vhd Line: 35
+Info (12128): Elaborating entity "Full_adder" for hierarchy "KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|AddSub:AddSub1|Adder:Adder1|Full_adder:FA0" File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/Adder.vhd Line: 31
+Info (12128): Elaborating entity "Registo" for hierarchy "KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|Registo:Registo1" File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/Counter.vhd Line: 59
+Info (12128): Elaborating entity "FFD" for hierarchy "KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyScan:KeyScan_inst|Counter:Counter_inst|Registo:Registo1|FFD:FFD0" File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/Register.vhd Line: 29
+Info (12128): Elaborating entity "KeyControl" for hierarchy "KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyControl:KeyControl_inst" File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/KeyDecode.vhd Line: 55
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "Q[0]" is stuck at GND File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/RouletteGame.vhd Line: 12
+    Warning (13410): Pin "Q[1]" is stuck at GND File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/RouletteGame.vhd Line: 12
+    Warning (13410): Pin "Q[2]" is stuck at GND File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/RouletteGame.vhd Line: 12
+    Warning (13410): Pin "Q[3]" is stuck at GND File: C:/Users/botel/Desktop/RouletteGame/RouletteGameVhdl/RouletteGame.vhd Line: 12
+Info (286030): Timing-Driven Synthesis is running
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 31 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 7 input pins
+    Info (21059): Implemented 9 output pins
+    Info (21061): Implemented 15 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 7 warnings
+    Info: Peak virtual memory: 4852 megabytes
+    Info: Processing ended: Mon Mar 10 16:43:49 2025
+    Info: Elapsed time: 00:00:10
+    Info: Total CPU time (on all processors): 00:00:19
+
+

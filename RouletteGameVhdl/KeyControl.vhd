@@ -6,6 +6,7 @@ port(
 		Kpress 		: in std_logic;
 		CLK		: in std_logic;
 		Kack				: in std_logic;
+		RESET   : in std_logic;
 		Kscan			: out std_logic;
 		Kval	: out std_logic
 );
@@ -24,7 +25,7 @@ CurrentState <= STATE_SCAN when RESET = '1' else NextState when rising_edge(clk)
 
 -- Generate Next State 
 GenerateNextState:
-process (CurrentState, B, Kack, Kpress)
+process (CurrentState, Kack, Kpress)
 	begin
 		case CurrentState is
 			when STATE_SCAN		=>	if (Kpress = '1') then 
@@ -36,13 +37,13 @@ process (CurrentState, B, Kack, Kpress)
 			when STATE_PROCESS	=>	if (Kack = '1') then 
 												NextState <= STATE_WAIT;
 											else 
-												NextState <= STATE_OPENING;
+												NextState <= STATE_PROCESS;
 											end if;
 											
 			when STATE_WAIT		=>	if (Kpress = '1') then 
-												NextState <= STATE_;
-											else if (Kpress ='0' and Kack = '1') then
-												NextState <= STATE_CLOSE;
+												NextState <= STATE_PROCESS;
+											elsif (Kpress ='0' and Kack = '1') then
+												NextState <= STATE_WAIT;
 											else
 												NextState <= STATE_SCAN;
 											end if;
@@ -51,7 +52,7 @@ process (CurrentState, B, Kack, Kpress)
 	end process;
 	
 -- Generate outputs
-Kval <= '1' when ( (CurrentState = STATE_PROCESS) else '0';
+Kval <= '1' when (CurrentState = STATE_PROCESS) else '0';
 		
 Kscan <= '1' when (CurrentState = STATE_SCAN and Kpress ='0') else '0';
 

@@ -7,8 +7,9 @@ entity KeyDecode is
 	COL: out std_logic_vector(3 downto 0);
 	CLK: in std_logic;
 	Kack: in std_logic;
+	RESET   : in std_logic;
 	Q: out std_logic_vector(3 downto 0);
-	Dval: out std_logic
+	Kval: out std_logic
 	);
 end entity;
 
@@ -19,6 +20,7 @@ component KeyScan
 		LIN: in std_logic_vector(3 downto 0);
 		COL: out std_logic_vector(3 downto 0);
 		CLK,Kscan: in std_logic;
+		RESET   : in std_logic;
 		Q: out std_logic_vector(3 downto 0);
 		Kpress: out std_logic
 		);
@@ -30,6 +32,7 @@ component KeyControl
 		CLK: in std_logic;
 		Kack: in std_logic;
 		Kscan: out std_logic;
+		RESET   : in std_logic;
 		Kval: out std_logic
 		);
 end component;
@@ -45,6 +48,7 @@ KeyScan_inst: KeyScan port map(
 	Q => Q,
 	CLK => CLK,
 	Kscan => Kscan_sig,
+	RESET => RESET,
 	Kpress => Kpress_sig
 );
 
@@ -53,7 +57,8 @@ KeyControl_inst: KeyControl port map(
 	CLK => CLK,
    Kack   => Kack,
 	Kscan => Kscan_sig,
-	Kval => Dval
+	RESET => RESET,
+	Kval => Kval
 );
 
 end structural;
