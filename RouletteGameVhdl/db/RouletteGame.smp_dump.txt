@@ -1,6 +1,0 @@
-
-State Machine - |RouletteGame|KeyboardReader:KeyboardReader_inst|KeyDecode:KeyDecode_inst|KeyControl:KeyControl_inst|CurrentState
-Name CurrentState.STATE_WAIT CurrentState.STATE_PROCESS CurrentState.STATE_SCAN 
-CurrentState.STATE_SCAN 0 0 0 
-CurrentState.STATE_PROCESS 0 1 1 
-CurrentState.STATE_WAIT 1 0 1 
