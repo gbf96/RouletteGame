@@ -41,8 +41,12 @@ component Counter
 end component;
 
 	signal CounterOut: std_logic_vector(3 downto 0);
+	signal bx: std_logic_vector(3 downto 0);
 
 begin
+
+bx <= "0000";
+
 
 MUX4_inst: MUX4 port map(
 A => LIN,
@@ -59,9 +63,11 @@ Counter_inst: Counter port map(
 PL => '0',
 CE => Kscan,
 CLK => CLK,
-Din => "0000",
+Din => bx,
 RESET => RESET,
 Q => CounterOut
 ); 
+
+Q <= CounterOut;
 
 end structural;

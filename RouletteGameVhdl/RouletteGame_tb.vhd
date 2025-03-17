@@ -9,7 +9,7 @@ end entity;
 architecture testbench of RouletteGame_tb is
 
     -- Signals for test
-    signal LIN    : std_logic_vector(3 downto 0) := (others => '0');
+    signal LIN    : std_logic_vector(3 downto 0);
     signal COL    : std_logic_vector(3 downto 0);
     signal CLK    : std_logic := '0';
     signal ACK    : std_logic := '0';
@@ -18,7 +18,7 @@ architecture testbench of RouletteGame_tb is
     signal Dval   : std_logic;
 
     -- Clock period
-    constant CLK_PERIOD : time := 10 ns;
+    constant CLK_PERIOD : time := 1 ns;
 
     -- Component under test
     component RouletteGame
@@ -58,36 +58,35 @@ begin
         wait;
     end process;
 
-    -- Stimulus process
     Stimulus: process
-    begin
-        -- Apply Reset
-        RESET <= '1';
-        wait for 20 ns;
-        RESET <= '0';
+begin
+    -- Apply Reset
+    RESET <= '1';
+    wait for 20 ns;
+    RESET <= '0';
 
-        -- Test case 1: No key pressed
-        LIN <= "0000";
-        ACK <= '0';
-        wait for 20 ns;
-        
-        -- Test case 2: Simulate a key press on line 2
-        LIN <= "0010";
-        wait for 20 ns;
-        
-        -- Test case 3: Send an acknowledgment signal
-        ACK <= '1';
-        wait for 10 ns;
-        ACK <= '0';
-		  LIN <= "0000";
-		  wait for 10 ns;
-        
-        -- Test case 4: Simulate another key press
-        LIN <= "1000";
-        wait for 30 ns;
+    -- Test case 1: No key pressed (Active Low)
+    LIN <= "1111";  -- Nenhuma tecla pressionada
+    ACK <= '0';
+    wait for 50 ns;
 
-        -- End simulation
-        wait;
-    end process;
+    -- Test case 2: Simulate a key press on line 2 (Active Low)
+    LIN <= "1101";  -- Linha 2 pressionada
+    wait for 50 ns;
+
+    -- Test case 3: Send an acknowledgment signal
+    ACK <= '1';
+    wait for 10 ns;
+    ACK <= '0';
+    LIN <= "1111";  -- Soltar a tecla
+    wait for 10 ns;
+
+    -- Test case 4: Simulate another key press (Active Low)
+    LIN <= "0111";  -- Linha 4 pressionada
+    wait for 30 ns;
+
+    -- End simulation
+    wait;
+end process;
 
 end testbench;
