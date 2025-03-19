@@ -1,7 +1,10 @@
 import isel.leic.UsbPort
+import isel.leic.utils.Time
 
 object KBD {
     const val NONE = 0
+    val K = arrayOf(0,0,0,0)
+
     // Inicia a classe
     fun init () {
         HAL.init()
@@ -9,8 +12,10 @@ object KBD {
 
     // Retorna de imediato a tecla premida ou NONE se nao ha tecla premida.
     fun getKey(): Char {
-        val key = HAL.readBits(0b00001111)
-        if (HAL.isBit(0b0001000)){
+
+
+        if (HAL.isBit(0b00010000)){
+            val key = HAL.readBits(0b00001111)
             when(key){
                 0b0000 -> return '1'
                 0b0001 -> return '4'
@@ -36,8 +41,8 @@ object KBD {
     // Retorna a tecla premida, caso ocorra antes do ’timeout’ (em milissegundos),
     // ou NONE caso contrario.
     fun waitKey(timeout: Long): Char {
-        val startTime = System.currentTimeMillis()
-        while (System.currentTimeMillis() - startTime < timeout) {
+        val startTime = Time.getTimeInMillis()
+        while (Time.getTimeInMillis() - startTime < timeout) {
             val key = getKey()
             if (key != NONE.toChar()) {
                 return key

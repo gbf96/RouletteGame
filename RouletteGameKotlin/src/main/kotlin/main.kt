@@ -1,8 +1,12 @@
 import isel.leic.UsbPort
 
 fun main() {
-    while (true){
-        val value = UsbPort.read()
-        UsbPort.write(value)
+    KBD.init()
+    while (true) {
+        var key = KBD.waitKey(1000)
+        HAL.setBits(0b00010000)
+        println(key)
+        HAL.clrBits(0b00010000)
+
     }
 }
