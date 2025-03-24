@@ -1,8 +1,9 @@
 import isel.leic.UsbPort
 
 fun main() {
-    while (true){
-        val value = UsbPort.read()
-        UsbPort.write(value)
+    KBD.init()
+    while (true) {
+        val key = KBD.waitKey(1000)
+        println(key)
     }
 }

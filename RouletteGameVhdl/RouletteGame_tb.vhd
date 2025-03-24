@@ -8,48 +8,48 @@ end entity;
 
 architecture testbench of RouletteGame_tb is
 
-    -- Signals for test
-    signal LIN    : std_logic_vector(3 downto 0);
-    signal COL    : std_logic_vector(3 downto 0);
-    signal CLK    : std_logic := '0';
-    signal ACK    : std_logic := '0';
-    signal RESET  : std_logic := '0';
-    signal Q      : std_logic_vector(3 downto 0);
-    signal Dval   : std_logic;
-
-    -- Clock period
-    constant CLK_PERIOD : time := 1 ns;
-
-    -- Component under test
+    -- Component a ser testado
     component RouletteGame
         port(
-            LIN    : in std_logic_vector(3 downto 0);
-            COL    : out std_logic_vector(3 downto 0);
-            CLK    : in std_logic;
-            ACK    : in std_logic;
-            RESET  : in std_logic;
-            Q      : out std_logic_vector(3 downto 0);
-            Dval   : out std_logic
+            LIN   : in std_logic_vector(3 downto 0);
+            COL   : out std_logic_vector(3 downto 0);
+            CLK   : in std_logic;
+            ACK   : in std_logic;
+            RESET : in std_logic;
+            Q     : out std_logic_vector(3 downto 0);
+            Dval  : out std_logic
         );
     end component;
 
-begin
-
-    -- Instantiate the unit under test (UUT)
-    UUT: RouletteGame port map(
-        LIN    => LIN,
-        COL    => COL,
-        CLK    => CLK,
-        ACK    => ACK,
-        RESET  => RESET,
-        Q      => Q,
-        Dval   => Dval
-    );
-
-    -- Clock process
-    CLK_process: process
+    -- Sinais para conectar ao DUT (Device Under Test)
+    signal LIN   : std_logic_vector(3 downto 0) := "1111"; -- Active low
+    signal COL   : std_logic_vector(3 downto 0);
+    signal CLK   : std_logic := '0';
+    signal ACK   : std_logic := '0';
+    signal RESET : std_logic := '1';
+    signal Q     : std_logic_vector(3 downto 0);
+    signal Dval  : std_logic;
+    
+    -- Clock process (100 MHz -> 10 ns período)
+    constant CLK_PERIOD : time := 10 ns;
+    
     begin
-        while now < 200 ns loop  -- Run for a limited time
+    
+    -- Instância do DUT
+    UUT: RouletteGame port map (
+        LIN   => LIN,
+        COL   => COL,
+        CLK   => CLK,
+        ACK   => ACK,
+        RESET => RESET,
+        Q     => Q,
+        Dval  => Dval
+    );
+    
+    -- Processo de clock
+    process
+    begin
+        while now < 2000 ns loop
             CLK <= '0';
             wait for CLK_PERIOD / 2;
             CLK <= '1';
@@ -57,36 +57,69 @@ begin
         end loop;
         wait;
     end process;
-
-    Stimulus: process
-begin
-    -- Apply Reset
-    RESET <= '1';
-    wait for 20 ns;
-    RESET <= '0';
-
-    -- Test case 1: No key pressed (Active Low)
-    LIN <= "1111";  -- Nenhuma tecla pressionada
-    ACK <= '0';
-    wait for 50 ns;
-
-    -- Test case 2: Simulate a key press on line 2 (Active Low)
-    LIN <= "1101";  -- Linha 2 pressionada
-    wait for 50 ns;
-
-    -- Test case 3: Send an acknowledgment signal
-    ACK <= '1';
-    wait for 10 ns;
-    ACK <= '0';
-    LIN <= "1111";  -- Soltar a tecla
-    wait for 10 ns;
-
-    -- Test case 4: Simulate another key press (Active Low)
-    LIN <= "0111";  -- Linha 4 pressionada
-    wait for 30 ns;
-
-    -- End simulation
-    wait;
-end process;
+    
+    process
+    begin
+        -- Reset
+        RESET <= '1';
+        wait for 20 ns;
+        RESET <= '0';
+        wait for 20 ns;
+        
+        -- Teste 1: Pressionar primeira tecla
+        LIN <= "1110";
+        wait for 16 * CLK_PERIOD;
+        assert Dval = '1' report "Erro: Dval nao ativou corretamente para tecla 1!" severity error;
+        wait for 10 ns;
+        
+        -- Liberar tecla e enviar ACK
+        LIN <= "1111";
+        ACK <= '1';
+        wait for 20 ns;
+        ACK <= '0';
+        wait for 40 ns;
+        
+        -- Teste 2: Pressionar segunda tecla
+        LIN <= "1101";
+        wait for 16 * CLK_PERIOD;
+        assert Dval = '1' report "Erro: Dval nao ativou corretamente para tecla 2!" severity error;
+        wait for 10 ns;
+        
+        -- Liberar tecla e enviar ACK
+        LIN <= "1111";
+        ACK <= '1';
+        wait for 20 ns;
+        ACK <= '0';
+        wait for 40 ns;
+        
+        -- Teste 3: Pressionar terceira tecla
+        LIN <= "1011";
+        wait for 16 * CLK_PERIOD;
+        assert Dval = '1' report "Erro: Dval nao ativou corretamente para tecla 3!" severity error;
+        wait for 10 ns;
+        
+        -- Liberar tecla e enviar ACK
+        LIN <= "1111";
+        ACK <= '1';
+        wait for 20 ns;
+        ACK <= '0';
+        wait for 50 ns;
+        
+        -- Teste 4: Pressionar quarta tecla
+        LIN <= "0111";
+        wait for 16 * CLK_PERIOD;
+        assert Dval = '1' report "Erro: Dval nao ativou corretamente para tecla 4!" severity error;
+        wait for 10 ns;
+        
+        -- Liberar tecla e enviar ACK
+        LIN <= "1111";
+        ACK <= '1';
+        wait for 20 ns;
+        ACK <= '0';
+        wait for 50 ns;
+        
+        report "Testbench finalizado com sucesso!" severity note;
+        wait;
+    end process;
 
 end testbench;
