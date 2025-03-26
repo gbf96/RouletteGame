@@ -33,9 +33,15 @@ component UsbPort
 	);
 END component;
 
+component clkDIV
+port ( clk_in: in std_logic;
+		 clk_out: out std_logic);
+end component;
+
 signal Qout: std_logic_vector(3 downto 0);
 signal Dvalout: std_logic;
 signal ACKout: std_logic;
+signal clkOUT: std_logic;
     
 begin
 
@@ -43,11 +49,18 @@ KeyboardReader_inst: KeyboardReader port map(
 	LIN => LIN,
 	COL => COL,
 	Q => Qout,
-	CLK => CLK,
+	CLK => clkOUT,
 	ACK => ACKout,
 	RESET => RESET,
 	Dval => Dvalout
 );
+
+clkDIV_inst: clkDIV port map(
+	clk_in => CLK,
+	clk_out => clkOUT
+);
+
+
 
 UsbPort_inst: UsbPort port map(
 	inputPort(3 downto 0) => Qout,

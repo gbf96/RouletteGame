@@ -10,8 +10,8 @@ end DEC4;
 
 architecture behavioral of DEC4 is
 begin
-    Y(3) <= not(S(1) and S(0));
-	 Y(2) <= not(S(1) and not S(0));
-	 Y(1) <= not(not S(1) and S(0));
-	 Y(0) <= not(not S(1) and not S(0));
+    Y(3) <= not(not S(1) and  not S(0));
+	 Y(2) <= not(not S(1) and S(0));
+	 Y(1) <= not(S(1) and not S(0));
+	 Y(0) <= not(S(1) and S(0));
 end behavioral;

@@ -34,13 +34,15 @@ process (CurrentState, Kack, Kpress)
 												NextState <= STATE_SCAN;
 											end if;
 											
-			when STATE_PROCESS	=>	if (Kpress = '0' and Kack = '1') then 
+			when STATE_PROCESS	=>	if (Kack = '1') then 
 												NextState <= STATE_WAIT;
-											else
+											else 
 												NextState <= STATE_PROCESS;
 											end if;
 											
-			when STATE_WAIT		=>	if (Kack = '1') then 
+			when STATE_WAIT		=>	if (Kpress = '1') then 
+												NextState <= STATE_WAIT;
+											elsif (Kpress ='0' and Kack = '1') then
 												NextState <= STATE_WAIT;
 											else
 												NextState <= STATE_SCAN;
@@ -52,6 +54,6 @@ process (CurrentState, Kack, Kpress)
 -- Generate outputs
 Kval <= '1' when (CurrentState = STATE_PROCESS) else '0';
 		
-Kscan <= '1' when (CurrentState = STATE_SCAN and Kpress ='0') else '0';
+Kscan <= '1' when (CurrentState = STATE_SCAN) else '0';
 
 end behavioral;

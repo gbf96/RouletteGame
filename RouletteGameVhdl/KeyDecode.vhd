@@ -39,6 +39,7 @@ end component;
 
 signal Kpress_sig: std_logic;
 signal Kscan_sig: std_logic;
+
     
 begin
 
