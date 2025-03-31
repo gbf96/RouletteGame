@@ -10,7 +10,7 @@ object HAL {
 
     // Retorna ’true’ se o bit definido pela mask esta com o valor logico ’1’ no UsbPort
     fun isBit(mask: Int): Boolean {
-        return (UsbPort.read() and mask) != 0
+        return readBits(mask) == mask
     }
 
     // Retorna os valores dos bits representados por mask presentes no UsbPort

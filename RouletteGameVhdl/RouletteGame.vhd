@@ -63,9 +63,9 @@ clkDIV_inst: clkDIV port map(
 
 
 UsbPort_inst: UsbPort port map(
-	inputPort(3 downto 0) => Qout,
+	inputPort(3 downto 0) => Qout(3 downto 0),
 	inputPort(4) => Dvalout,
-	outputPort(4) => ACKout
+	outputPort(7) => ACKout
 );
 
 end structural;

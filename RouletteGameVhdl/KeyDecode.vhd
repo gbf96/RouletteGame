@@ -39,15 +39,17 @@ end component;
 
 signal Kpress_sig: std_logic;
 signal Kscan_sig: std_logic;
-
+signal not_CLK: std_logic;
     
 begin
+
+not_CLK <= NOT CLK;
 
 KeyScan_inst: KeyScan port map(
 	LIN => LIN,
 	COL => COL,
 	Q => Q,
-	CLK => CLK,
+	CLK => not_CLK,
 	Kscan => Kscan_sig,
 	RESET => RESET,
 	Kpress => Kpress_sig

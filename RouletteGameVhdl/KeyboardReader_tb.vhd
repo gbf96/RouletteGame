@@ -25,7 +25,7 @@ architecture testbench of KeyboardReader_tb is
     signal COL   : std_logic_vector(3 downto 0);
     signal CLK   : std_logic := '0';
     signal ACK   : std_logic := '0';
-    signal RESET : std_logic := '1';
+    signal RESET : std_logic;
     signal Q     : std_logic_vector(3 downto 0);
     signal Dval  : std_logic;
     

@@ -47,7 +47,7 @@ BEGIN
         A    => outputReg,
         B    => bx,
         CBi  => CE,
-        OPau => '1',
+        OPau => '0',
         S    => AddSubOut
     );
 

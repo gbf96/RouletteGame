@@ -40,12 +40,10 @@ process (CurrentState, Kack, Kpress)
 												NextState <= STATE_PROCESS;
 											end if;
 											
-			when STATE_WAIT		=>	if (Kpress = '1') then 
-												NextState <= STATE_WAIT;
-											elsif (Kpress ='0' and Kack = '1') then
-												NextState <= STATE_WAIT;
-											else
+			when STATE_WAIT		=>	if (Kpress = '0' and Kack = '0') then
 												NextState <= STATE_SCAN;
+											else
+												NextState <= STATE_WAIT;
 											end if;
 											
 		end case;

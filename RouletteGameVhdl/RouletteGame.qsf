@@ -39,7 +39,7 @@
 
 set_global_assignment -name FAMILY "MAX 10"
 set_global_assignment -name DEVICE 10M50DAF484C6GES
-set_global_assignment -name TOP_LEVEL_ENTITY KeyboardReader
+set_global_assignment -name TOP_LEVEL_ENTITY RouletteGame
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 19.1.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "19:48:28  FEBRUARY 24, 2025"
 set_global_assignment -name LAST_QUARTUS_VERSION "19.1.0 Lite Edition"
@@ -76,10 +76,10 @@ set_location_assignment PIN_W5 -to LIN[0]
 set_location_assignment PIN_AA14 -to LIN[1]
 set_location_assignment PIN_W12 -to LIN[2]
 set_location_assignment PIN_AB12 -to LIN[3]
-set_location_assignment PIN_AB11 -to COL[0]
-set_location_assignment PIN_AB10 -to COL[1]
-set_location_assignment PIN_AA9 -to COL[2]
-set_location_assignment PIN_AA8 -to COL[3]
+set_location_assignment PIN_AA8 -to COL[0]
+set_location_assignment PIN_AA9 -to COL[1]
+set_location_assignment PIN_AB10 -to COL[2]
+set_location_assignment PIN_AB11 -to COL[3]
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top

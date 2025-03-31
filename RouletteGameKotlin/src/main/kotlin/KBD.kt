@@ -2,29 +2,33 @@
 import isel.leic.utils.Time
 
 object KBD {
-    const val NONE = 10
+    private const val NONE = 0.toChar()
+    private const val DVAL_MASK = 0x10
+    private const val K_MASK = 0x0F
+    private const val ACK_MASK = 0x80
+
     // Inicia a classe
     fun init () {
         HAL.init()
+        HAL.clrBits(ACK_MASK)
     }
 
     // Retorna de imediato a tecla premida ou NONE se nao ha tecla premida.
     fun getKey(): Char {
         val pad = charArrayOf('1', '4', '7', '*', '2', '5', '8', '0','3','6', '9', '#', 'A', 'B', 'C', 'D')
-        val c: Char
-        if (HAL.isBit(0b00010000)) {
-            val key = HAL.readBits(0b00001111)
-            HAL.setBits(0b00010000)
+        if (HAL.isBit(DVAL_MASK)) {
+            val key = HAL.readBits(K_MASK)
+            HAL.setBits(ACK_MASK)
             val c = pad[key]
 
             while (true){
-                if (!HAL.isBit(0b00010000)){
-                    HAL.clrBits(0b00010000)
+                if (!HAL.isBit(DVAL_MASK)){
+                    HAL.clrBits(ACK_MASK)
                     return c
                 }
             }
         }
-        return NONE.toChar()
+        return NONE
     }
 
     // Retorna a tecla premida, caso ocorra antes do ’timeout’ (em milissegundos),
@@ -33,10 +37,10 @@ object KBD {
         val startTime = Time.getTimeInMillis()
         while (Time.getTimeInMillis() - startTime < timeout) {
             val key = getKey()
-            if (key != NONE.toChar()) {
+            if (key != NONE) {
                 return key
             }
         }
-        return NONE.toChar()
+        return NONE
     }
 }
