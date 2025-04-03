@@ -8,7 +8,7 @@ object LCD {
     private const val WRITE_MASK = 0x0F
 
     private const val INIT_DATA = 0x03
-    private const val INIT_4BITS = 0x03
+    private const val INIT_4BITS = 0x02
     private const val FONT = 0x28
     private const val DISPLAY_OFF = 0x08
     private const val DISPLAY_CLR = 0x01
@@ -27,8 +27,9 @@ object LCD {
         if (rs) HAL.setBits(RS_MASK) else HAL.clrBits(RS_MASK)
         HAL.setBits(EN_MASK)
         HAL.writeBits(WRITE_MASK, data)
+        Time.sleep(1)
         HAL.clrBits(EN_MASK)
-        Time.sleep(5)
+
     }
 
     // Escreve um byte de comando/dados no LCD em serie
@@ -55,11 +56,11 @@ object LCD {
     fun init () {
 
 
-        Time.sleep(50)
-        writeNibble(false, INIT_DATA)
         Time.sleep(15)
         writeNibble(false, INIT_DATA)
         Time.sleep(5)
+        writeNibble(false, INIT_DATA)
+        Time.sleep(1)
         writeNibble(false, INIT_DATA)
 
         writeNibble(false, INIT_4BITS)
@@ -67,11 +68,8 @@ object LCD {
         writeCMD(FONT)
         writeCMD(DISPLAY_OFF)
         writeCMD(DISPLAY_CLR)
-        Time.sleep(1)
         writeCMD(ENTRY_MODE)
         writeCMD(DISPLAY_CURSOR_ON)
-        Time.sleep(10)
-
     }
 
     // Escreve um carater na posicao corrente.

@@ -7,6 +7,8 @@ entity RouletteGame is
 	LIN: in std_logic_vector(3 downto 0);
 	COL: out std_logic_vector(3 downto 0);
 	CLK: in std_logic;
+	LCD_CMD: out std_logic_vector(4 downto 0);
+	LCD_EN: out std_logic;
 	RESET   : in std_logic
 	);
 end entity;
@@ -42,8 +44,13 @@ signal Qout: std_logic_vector(3 downto 0);
 signal Dvalout: std_logic;
 signal ACKout: std_logic;
 signal clkOUT: std_logic;
+signal LCD_ENout: std_logic;
+signal LCD_CMDout: std_logic_vector(4 downto 0);
     
 begin
+
+LCD_EN <= LCD_ENout;
+LCD_CMD <= LCD_CMDout;
 
 KeyboardReader_inst: KeyboardReader port map(
 	LIN => LIN,
@@ -65,6 +72,8 @@ clkDIV_inst: clkDIV port map(
 UsbPort_inst: UsbPort port map(
 	inputPort(3 downto 0) => Qout(3 downto 0),
 	inputPort(4) => Dvalout,
+	outputPort(4 downto 0) => LCD_CMDout(4 downto 0),
+	outputPort(5) => LCD_ENout,
 	outputPort(7) => ACKout
 );
 
