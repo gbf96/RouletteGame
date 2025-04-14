@@ -79,11 +79,11 @@ architecture testbench of SerialReceiver_tb is
     end component;
 
     -- Sinais de entrada e saída para o SerialReceiver
-    signal SDX      : std_logic := '0';   -- Dados serializados (entrada de dados)
-    signal SCLK     : std_logic := '0';   -- Clock
-    signal notSS    : std_logic := '1';   -- Sinal de seleção do escravo (ativo baixo)
-    signal accept   : std_logic := '0';   -- Sinal para aceitar dados
-    signal RESET    : std_logic := '0';   -- Reset
+    signal SDX      : std_logic ;  -- Dados serializados (entrada de dados)
+    signal SCLK     : std_logic; -- Clock
+    signal notSS    : std_logic ;   -- Sinal de seleção do escravo (ativo baixo)
+    signal accept   : std_logic ;  -- Sinal para aceitar dados
+    signal RESET    : std_logic ;  -- Reset
     signal D        : std_logic_vector(4 downto 0);  -- Dados recebidos
     signal DXval    : std_logic;          -- Indica se os dados estão prontos
 
@@ -189,10 +189,14 @@ begin
         RESET <= '1'; 
         wait for 20 ns;
         RESET <= '0'; 
+		  accept <= '0'; 
+		  notSS <= '1';
+		  SDX <= '0';
         wait for 20 ns;
         
         -- Teste 1: Pressionar primeira tecla (notSS = '0', dados sendo recebidos)
         notSS <= '0';  -- Início da recepção de dados
+		  wait for CLK_PERIOD;
         SDX <= '1';    -- Envia dado 1
         wait for CLK_PERIOD;
         SDX <= '0';    -- Envia dado 0
@@ -200,14 +204,21 @@ begin
         SDX <= '1';    -- Envia dado 1
         wait for CLK_PERIOD;
         SDX <= '0';    -- Envia dado 0
+        wait for CLK_PERIOD;
+		  SDX <= '0';    -- Envia dado 0
+        wait for CLK_PERIOD;
+		  SDX <= '0';    -- Envia dado 1
         wait for CLK_PERIOD;
         
         -- Finaliza a recepção (notSS = '1', não há mais dados a serem recebidos)
         notSS <= '1';
-        wait for 40 ns;  -- Aguarda um tempo para a transição
+        wait for 20 ns;  -- Aguarda um tempo para a transição
+		  accept <= '1'; 
+        wait for 20 ns;
         
         -- Teste 2: Enviar novos dados (para simular a continuidade)
         notSS <= '0';  -- Inicia a recepção novamente
+		  wait for CLK_PERIOD;
         SDX <= '1';    -- Envia dado 1
         wait for CLK_PERIOD;
         SDX <= '1';    -- Envia dado 1
@@ -216,14 +227,20 @@ begin
         wait for CLK_PERIOD;
         SDX <= '1';    -- Envia dado 1
         wait for CLK_PERIOD;
+		  SDX <= '1';    -- Envia dado 1
+        wait for CLK_PERIOD;
+		  SDX <= '1';    -- Envia dado 1
+        wait for CLK_PERIOD;
+        
         
         -- Finaliza a recepção (notSS = '1', não há mais dados a serem recebidos)
         notSS <= '1';
-        wait for 40 ns;
+        wait for 20 ns;
+		  accept <= '1'; 
+        wait for 20 ns;
 
         -- Finaliza o testbench
         wait;
     end process;
 
 end testbench;
-

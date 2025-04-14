@@ -36,7 +36,6 @@ object HAL {
         usbPort = usbPort and mask.inv()
         UsbPort.write(usbPort)
     }
-
 }
 
 

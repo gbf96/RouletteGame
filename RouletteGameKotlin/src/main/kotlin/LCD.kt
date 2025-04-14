@@ -14,6 +14,8 @@ object LCD {
     private const val DISPLAY_CLR = 0x01
     private const val ENTRY_MODE = 0x06
     private const val DISPLAY_CURSOR_ON = 0x0F
+    private const val INSTRUCTION_REGISTER = 1
+    private const val DATA_REGISTER = 0
 
     // Dimensao do display.
     private const val LINES = 2
@@ -34,7 +36,8 @@ object LCD {
 
     // Escreve um byte de comando/dados no LCD em serie
     private fun writeNibbleSerial(rs : Boolean , data: Int) {
-        TODO()
+        if (rs) SerialEmitter.send(SerialEmitter.Destination.LCD, realData or INSTRUCTION_REGISTER,)
+        else SerialEmitter.send(SerialEmitter.Destination.LCD, realData or DATA_REGISTER)
     }
 
     // Escreve um nibble de comando/dados no LCD

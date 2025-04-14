@@ -4,7 +4,7 @@ use ieee.std_logic_1164.all;
 entity KeyControl is
 port(
 		Kpress 		: in std_logic;
-		CLK		: in std_logic;
+		clk		: in std_logic;
 		Kack				: in std_logic;
 		RESET   : in std_logic;
 		Kscan			: out std_logic;
