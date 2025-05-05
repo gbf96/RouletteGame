@@ -46,7 +46,7 @@ process (CurrentState, enRX, dFlag, pFlag, RXerror, accept)
 											
 			when STATE_WRITE_OFF		=>	if (pFlag = '0') then
 													NextState <= STATE_WRITE_OFF;
-												elsif (pFlag = '1' and RXerror = '1')then
+												elsif (pFlag = '1' and RXerror = '0')then
 													NextState <= STATE_OFF;
 												else
 													NextState <= STATE_WAIT;

@@ -14,15 +14,13 @@ object LCD {
     private const val DISPLAY_CLR = 0x01
     private const val ENTRY_MODE = 0x06
     private const val DISPLAY_CURSOR_ON = 0x0F
-    private const val INSTRUCTION_REGISTER = 1
-    private const val DATA_REGISTER = 0
 
     // Dimensao do display.
     private const val LINES = 2
     private const val COLS = 16
 
     // Define se a interface e Serie ou Paralela
-    private const val SERIAL_INTERFACE = false
+    private const val SERIAL_INTERFACE = true
 
     // Escreve um byte de comando/dados no LCD em paralelo
     private fun writeNibbleParallel(rs : Boolean , data: Int){
@@ -31,13 +29,15 @@ object LCD {
         HAL.writeBits(WRITE_MASK, data)
         Time.sleep(1)
         HAL.clrBits(EN_MASK)
-
     }
 
     // Escreve um byte de comando/dados no LCD em serie
     private fun writeNibbleSerial(rs : Boolean , data: Int) {
-        if (rs) SerialEmitter.send(SerialEmitter.Destination.LCD, realData or INSTRUCTION_REGISTER,)
-        else SerialEmitter.send(SerialEmitter.Destination.LCD, realData or DATA_REGISTER)
+        var d = data shl 1
+        val r = if(rs) 1 else 0
+        d = d or r
+        if (rs) SerialEmitter.send(SerialEmitter.Destination.LCD, d,5)
+        else SerialEmitter.send(SerialEmitter.Destination.LCD, d,5)
     }
 
     // Escreve um nibble de comando/dados no LCD
@@ -57,7 +57,7 @@ object LCD {
 
     // Envia a sequencia de iniciacao para comunicacao a 4 bits.
     fun init () {
-
+        SerialEmitter.init()
 
         Time.sleep(15)
         writeNibble(false, INIT_DATA)

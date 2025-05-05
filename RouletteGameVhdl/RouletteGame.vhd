@@ -27,6 +27,18 @@ component KeyboardReader
 		);
 end component;
 
+component SLCDC
+		port(
+		SDX: in std_logic;
+		SCLK: in std_logic;
+		clk: in std_logic;
+		notSS: in std_logic;
+		Dout: out std_logic_vector(4 downto 0);
+		Wrl: out std_logic;
+		RESET   : in std_logic
+		);
+end component;
+
 component UsbPort 
 	PORT
 	(
@@ -44,13 +56,13 @@ signal Qout: std_logic_vector(3 downto 0);
 signal Dvalout: std_logic;
 signal ACKout: std_logic;
 signal clkOUT: std_logic;
-signal LCD_ENout: std_logic;
-signal LCD_CMDout: std_logic_vector(4 downto 0);
+signal SDX: std_logic;
+signal SCLK: std_logic;
+signal LCDsel: std_logic;
     
 begin
 
-LCD_EN <= LCD_ENout;
-LCD_CMD <= LCD_CMDout;
+
 
 KeyboardReader_inst: KeyboardReader port map(
 	LIN => LIN,
@@ -60,6 +72,16 @@ KeyboardReader_inst: KeyboardReader port map(
 	ACK => ACKout,
 	RESET => RESET,
 	Dval => Dvalout
+);
+
+SLCDC_inst: SLCDC port map(
+	SDX => SDX,
+	SCLK => SCLK,
+	clk => clkOUT,
+	notSS => LCDsel,
+	Dout => LCD_CMD,
+	Wrl => LCD_EN,
+	RESET => RESET
 );
 
 clkDIV_inst: clkDIV port map(
@@ -72,9 +94,9 @@ clkDIV_inst: clkDIV port map(
 UsbPort_inst: UsbPort port map(
 	inputPort(3 downto 0) => Qout(3 downto 0),
 	inputPort(4) => Dvalout,
-	outputPort(4 downto 0) => LCD_CMDout(4 downto 0),
-	outputPort(5) => LCD_ENout,
-	outputPort(7) => ACKout
+	outputPort(0) => SDX,
+	outputPort(1) => SCLK,
+	outputPort(2) => LCDsel
 );
 
 end structural;

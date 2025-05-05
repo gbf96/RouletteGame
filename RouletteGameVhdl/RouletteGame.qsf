@@ -39,7 +39,7 @@
 
 set_global_assignment -name FAMILY "MAX 10"
 set_global_assignment -name DEVICE 10M50DAF484C6GES
-set_global_assignment -name TOP_LEVEL_ENTITY SerialReceiver
+set_global_assignment -name TOP_LEVEL_ENTITY RouletteGame
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 19.1.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "19:48:28  FEBRUARY 24, 2025"
 set_global_assignment -name LAST_QUARTUS_VERSION "19.1.0 Lite Edition"
@@ -81,12 +81,12 @@ set_location_assignment PIN_AA9 -to COL[1]
 set_location_assignment PIN_AB10 -to COL[2]
 set_location_assignment PIN_AB11 -to COL[3]
 set_global_assignment -name SOURCE_FILE db/RouletteGame.cmp.rdb
-set_location_assignment PIN_W8 -to LCD_CMD[4]
+set_location_assignment PIN_Y7 -to LCD_CMD[4]
 set_location_assignment PIN_V5 -to LCD_EN
-set_location_assignment PIN_W11 -to LCD_CMD[0]
-set_location_assignment PIN_AA10 -to LCD_CMD[1]
-set_location_assignment PIN_Y8 -to LCD_CMD[2]
-set_location_assignment PIN_Y7 -to LCD_CMD[3]
+set_location_assignment PIN_W8 -to LCD_CMD[0]
+set_location_assignment PIN_W11 -to LCD_CMD[1]
+set_location_assignment PIN_AA10 -to LCD_CMD[2]
+set_location_assignment PIN_Y8 -to LCD_CMD[3]
 set_global_assignment -name VHDL_FILE Registo3.vhd
 set_global_assignment -name VHDL_FILE Adder3.vhd
 set_global_assignment -name VHDL_FILE AddSub3.vhd
@@ -95,9 +95,10 @@ set_global_assignment -name VHDL_FILE SerialControl.vhd
 set_global_assignment -name VHDL_FILE SerialReceiver.vhd
 set_global_assignment -name VHDL_FILE Is5.vhd
 set_global_assignment -name VHDL_FILE Is6.vhd
+set_global_assignment -name VHDL_FILE LCDDispatcher.vhd
+set_global_assignment -name VHDL_FILE SLCDC.vhd
+set_global_assignment -name VHDL_FILE ParityCheck.vhd
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_global_assignment -name VHDL_FILE SerialReceiver_tb.vhd
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
-set_global_assignment -name VHDL_FILE LCDDispatcher.vhd

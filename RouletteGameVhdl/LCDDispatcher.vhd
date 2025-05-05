@@ -3,11 +3,11 @@ use ieee.std_logic_1164.all;
 
 entity LCDDispatcher is 
 	port(
-		Din   : in std_logic_vector(3 downto 0);
+		Din   : in std_logic_vector(4 downto 0);
 		Dval  : in std_logic;
 		clk   : in std_logic;
 		RESET : in std_logic;
-		Dout  : out std_logic_vector(3 downto 0);
+		Dout  : out std_logic_vector(4 downto 0);
 		Wrl   : out std_logic;
 		done  : out std_logic
 	);
@@ -15,7 +15,7 @@ end entity;
 
 architecture behavioral of LCDDispatcher is
 
-	type STATE_TYPE is (STATE_WAIT, STATE_WRITE);
+	type STATE_TYPE is (STATE_WAIT, STATE_WRITE,STATE_DONE);
 	signal CurrentState, NextState : STATE_TYPE;
 
 begin
@@ -35,7 +35,13 @@ begin
 				end if;
 
 			when STATE_WRITE =>
-				NextState <= STATE_WAIT;
+					NextState <= STATE_DONE;
+			when STATE_DONE	=>
+				if Dval = '0' then
+					NextState <= STATE_WAIT;
+				else
+					NextState <= STATE_DONE;
+				end if;
 		end case;
 	end process;
 
@@ -43,6 +49,6 @@ begin
 	Dout <= Din;
 
 	Wrl  <= '1' when (CurrentState = STATE_WRITE) else '0';
-	done <= '1' when (CurrentState = STATE_WRITE) else '0';
+	done <= '1' when (CurrentState = STATE_DONE) else '0';
 
 end architecture;
