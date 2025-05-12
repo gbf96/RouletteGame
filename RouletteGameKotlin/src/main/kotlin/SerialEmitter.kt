@@ -27,6 +27,8 @@ object SerialEmitter {
             Destination.ROULETTE -> RD_SEL
         }
         HAL.clrBits(destiny)
+        HAL.clrBits(SCLK_MASK)
+        HAL.setBits(SCLK_MASK)
 
         var numOfOnes = 0
 
@@ -49,5 +51,10 @@ object SerialEmitter {
         HAL.setBits(destiny)
         HAL.clrBits(SCLK_MASK)
         HAL.setBits(SCLK_MASK)
+        HAL.clrBits(SCLK_MASK)
+        HAL.setBits(SCLK_MASK)
+
+
+
     }
 }

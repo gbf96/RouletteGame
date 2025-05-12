@@ -5,7 +5,7 @@ object RouletteDisplay {
 
     // Inicia a classe, estabelecendo os valores iniciais.
     fun init () {
-
+        TODO()
     }
     // Realiza a animacaoo do sorteio
     fun animation(){
