@@ -6,7 +6,6 @@ end entity;
 
 architecture testbench of SLCDC_tb is
 
-    -- Declaração do componente
     component SLCDC
         port(
             SDX    : in std_logic;
@@ -19,11 +18,10 @@ architecture testbench of SLCDC_tb is
         );
     end component;
 
-    -- Sinais para conectar ao UUT
     signal SDX    : std_logic := '0';
     signal SCLK   : std_logic := '0';
     signal clk    : std_logic := '0';
-    signal notSS  : std_logic := '1'; -- inicialmente inativo
+    signal notSS  : std_logic := '1';
     signal Dout   : std_logic_vector(4 downto 0);
     signal Wrl    : std_logic;
     signal RESET  : std_logic := '0';
@@ -33,7 +31,6 @@ architecture testbench of SLCDC_tb is
 
 begin
 
-    -- Instância da unidade em teste (UUT)
     UUT: SLCDC port map(
         SDX    => SDX,
         SCLK   => SCLK,
@@ -44,7 +41,6 @@ begin
         RESET  => RESET
     );
 
-    -- Geração do clock principal (clk)
     clk_process : process
     begin
         while now < 2000 ns loop
@@ -56,7 +52,6 @@ begin
         wait;
     end process;
 
-    -- Geração do clock Serial (SCLK)
     sclk_process : process
     begin
         while now < 2000 ns loop
@@ -68,7 +63,6 @@ begin
         wait;
     end process;
 
-    -- Estímulos
     stim_proc : process
     begin
         -- Reset inicial
@@ -100,8 +94,8 @@ begin
         SDX <= '1'; wait for SCLK_PERIOD;
         SDX <= '0'; wait for SCLK_PERIOD;
         SDX <= '1'; wait for SCLK_PERIOD;
-        SDX <= '0'; wait for SCLK_PERIOD;
-		  SDX <= '1'; wait for SCLK_PERIOD;
+        SDX <= '1'; wait for SCLK_PERIOD;
+		  SDX <= '0'; wait for SCLK_PERIOD;
 
         notSS <= '1';
         

@@ -36,8 +36,7 @@ object LCD {
         var d = data shl 1
         val r = if(rs) 1 else 0
         d = d or r
-        if (rs) SerialEmitter.send(SerialEmitter.Destination.LCD, d,5)
-        else SerialEmitter.send(SerialEmitter.Destination.LCD, d,5)
+        SerialEmitter.send(SerialEmitter.Destination.LCD, d,5)
     }
 
     // Escreve um nibble de comando/dados no LCD

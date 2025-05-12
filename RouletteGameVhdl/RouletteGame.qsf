@@ -98,6 +98,8 @@ set_global_assignment -name VHDL_FILE Is6.vhd
 set_global_assignment -name VHDL_FILE LCDDispatcher.vhd
 set_global_assignment -name VHDL_FILE SLCDC.vhd
 set_global_assignment -name VHDL_FILE ParityCheck.vhd
+set_global_assignment -name VHDL_FILE output_files/CLKDIV2.vhd
+set_global_assignment -name VHDL_FILE ShiftRegister.vhd
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top

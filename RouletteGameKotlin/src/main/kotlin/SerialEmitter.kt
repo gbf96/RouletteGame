@@ -1,19 +1,20 @@
 import isel.leic.simul.module.LCD
+import isel.leic.utils.Time
 
 // Envia tramas para os diferentes modulos Serial Receiver.
 object SerialEmitter {
 
-    private const val SCLK_MASK = 0x02
-    private const val SDX_MASK = 0x01
-    private const val LCD_SEL = 0x40
-    private const val RD_SEL = 0x80
+    private const val SCLK_MASK = 0x10
+    private const val SDX_MASK = 0x08
+    private const val LCD_SEL = 0x01
+    private const val RD_SEL = 0x02
 
     enum class Destination {LCD, ROULETTE}
     // Inicia a classe
     fun init () {
-        HAL.init()
         HAL.setBits(LCD_SEL)
         HAL.setBits(RD_SEL)
+        HAL.clrBits(SCLK_MASK)
     }
     // Envia uma trama para o SerialReceiver
     // identificado o destino em ’addr’,
@@ -26,8 +27,6 @@ object SerialEmitter {
             Destination.ROULETTE -> RD_SEL
         }
         HAL.clrBits(destiny)
-        HAL.clrBits(SCLK_MASK)
-        HAL.setBits(SCLK_MASK)
 
         var numOfOnes = 0
 
@@ -36,13 +35,14 @@ object SerialEmitter {
         for (i in 0..<size){
             bit = 0x1 and (data shr (i))
             if (bit != 0) numOfOnes++
+            bit = bit shl 3
             HAL.writeBits(SDX_MASK, bit)
             HAL.clrBits(SCLK_MASK)
             HAL.setBits(SCLK_MASK)
         }
 
         if (numOfOnes % 2 != 0) HAL.writeBits(SDX_MASK, 0)
-        else HAL.writeBits(SDX_MASK, 1)
+        else HAL.writeBits(SDX_MASK, 0x8)
         HAL.clrBits(SCLK_MASK)
         HAL.setBits(SCLK_MASK)
 
