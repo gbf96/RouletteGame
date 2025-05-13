@@ -10,5 +10,5 @@ END Is9;
 
 ARCHITECTURE behavior OF Is9 IS
 BEGIN
-    S <= (input(3) and not input(2) and not input(1) and not input(0));  
+    S <= (input(3) and not input(2) and not input(1) and input(0));  
 END behavior;

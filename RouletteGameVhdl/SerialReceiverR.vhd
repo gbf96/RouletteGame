@@ -82,8 +82,8 @@ end component;
 signal wrout: std_logic;
 signal initout: std_logic;
 signal Errout: std_logic;
-signal Qout: std_logic_vector(2 downto 0);
-signal bx: std_logic_vector(2 downto 0);
+signal Qout: std_logic_vector(3 downto 0);
+signal bx: std_logic_vector(3 downto 0);
 signal is8sig: std_logic;
 signal is9sig: std_logic;
 
@@ -95,8 +95,8 @@ bx <= "0000";
 
 SerialControl_inst: SerialControl port map(
 	enRX => notSS,
-	dFlag => is5sig,
-	pFlag => is6sig,
+	dFlag => is8sig,
+	pFlag => is9sig,
 	RXerror => Errout,
 	clk => SCLK,
 	accept => accept,
@@ -115,7 +115,7 @@ ParityCheck_inst: ParityCheck port map(
 
 
 
-ShiftRegister_inst: ShiftRegister port map(
+ShiftRegisterR_inst: ShiftRegisterR port map(
 	CLK => SCLK,
 	Data => SDX,
 	enableshift => wrout,

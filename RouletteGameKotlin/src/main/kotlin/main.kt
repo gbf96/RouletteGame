@@ -5,7 +5,8 @@ fun main() {
     KBD.init()
     LCD.init()
     LCD.write("Roulette game")
-    
+    RouletteDisplay.off(false)
+    RouletteDisplay.setValue(0x03)
+
 
 }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          

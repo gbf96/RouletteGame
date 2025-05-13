@@ -10,5 +10,5 @@ END Is8;
 
 ARCHITECTURE behavior OF Is8 IS
 BEGIN
-    S <= (not input(3) and input(2) and input(1) and input(0));  
+    S <= (input(3) and not input(2) and not input(1) and not input(0));  
 END behavior;

@@ -8,10 +8,14 @@ entity RouletteGame is
 	COL: out std_logic_vector(3 downto 0);
 	CLK: in std_logic;
 	LCD_CMD: out std_logic_vector(4 downto 0);
---	RData: out std_logic_vector(7 downto 0);
 	LCD_EN: out std_logic;
---	set: out std_logic;
-	RESET   : in std_logic
+	RESET   : in std_logic;
+	HEX0	: out std_logic_vector(7 downto 0);
+	HEX1	: out std_logic_vector(7 downto 0);
+	HEX2	: out std_logic_vector(7 downto 0);
+	HEX3	: out std_logic_vector(7 downto 0);
+	HEX4	: out std_logic_vector(7 downto 0);
+	HEX5	: out std_logic_vector(7 downto 0)
 	);
 end entity;
 
@@ -41,17 +45,30 @@ component SLCDC
 		);
 end component;
 
---component SRC
---		port(
---		SDX: in std_logic;
---		SCLK: in std_logic;
---		clk: in std_logic;
---		notSS: in std_logic;
---		Dout: out std_logic_vector(7 downto 0);
---		WrD: out std_logic;
---		RESET   : in std_logic
---		);
---end component;
+component SRC
+		port(
+		SDX: in std_logic;
+		SCLK: in std_logic;
+		clk: in std_logic;
+		notSS: in std_logic;
+		Dout: out std_logic_vector(7 downto 0);
+		WrD: out std_logic;
+		RESET   : in std_logic
+		);
+end component;
+
+component rouletteDisplay
+port(	set	: in std_logic;
+		cmd	: in std_logic_vector(2 downto 0);
+		data	: in std_logic_vector(4 downto 0);
+		HEX0	: out std_logic_vector(7 downto 0);
+		HEX1	: out std_logic_vector(7 downto 0);
+		HEX2	: out std_logic_vector(7 downto 0);
+		HEX3	: out std_logic_vector(7 downto 0);
+		HEX4	: out std_logic_vector(7 downto 0);
+		HEX5	: out std_logic_vector(7 downto 0)
+		);
+end component;
 
 component UsbPort 
 	PORT
@@ -79,10 +96,12 @@ signal clkOUT2: std_logic;
 signal SDX: std_logic;
 signal SCLK: std_logic;
 signal LCDsel: std_logic;
---signal RDsel: std_logic;
+signal RDsel: std_logic;
+signal setSIG: std_logic;
+signal RD_dataSIG: std_logic_vector(4 downto 0);
+signal RD_cmdSIG: std_logic_vector(2 downto 0);
     
 begin
-
 
 
 KeyboardReader_inst: KeyboardReader port map(
@@ -105,15 +124,28 @@ SLCDC_inst: SLCDC port map(
 	RESET => RESET
 );
 
---SRC_inst: SRC port map(
---	SDX => SDX,
---	SCLK => SCLK,
---	clk => clkOUT2,
--- notSS => RDsel,
---	Dout => RData,
---	WrD => set,
---	RESET => RESET
---);
+SRC_inst: SRC port map(
+	SDX => SDX,
+	SCLK => SCLK,
+	clk => clkOUT2,
+   notSS => RDsel,
+	Dout(2 downto 0) => RD_cmdSIG,
+	Dout(7 downto 3) => RD_dataSIG,
+	WrD => setSIG,
+	RESET => RESET
+);
+
+RouletteDisplay_inst: RouletteDisplay port map(
+	set => setSIG,
+	cmd => RD_cmdSIG,
+	data => RD_dataSIG,
+   HEX0 => HEX0,
+	HEX1 => HEX1,
+	HEX2 => HEX2,
+	HEX3 => HEX3,
+	HEX4 => HEX4,
+	HEX5 => HEX5	
+);
 
 clkDIV_inst: clkDIV port map(
 	clk_in => CLK,
@@ -130,7 +162,7 @@ UsbPort_inst: UsbPort port map(
 	inputPort(3 downto 0) => Qout(3 downto 0),
 	inputPort(4) => Dvalout,
 	outputPort(0) => LCDsel,
---	outputPort(1) => RDsel,
+	outputPort(1) => RDsel,
 	outputPort(3) => SDX,
 	outputPort(4) => SCLK,
 	outputPort(7) => ACKout
