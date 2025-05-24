@@ -20,10 +20,8 @@ architecture behavioral of LCDDispatcher is
 
 begin
 
-	-- Flip-Flop de Estado
 	CurrentState <= STATE_WAIT when RESET = '1' else NextState when rising_edge(clk);
 
-	-- Geração do próximo estado
 	process(CurrentState, Dval)
 	begin
 		case CurrentState is
@@ -45,7 +43,6 @@ begin
 		end case;
 	end process;
 
-	-- Saídas
 	Dout <= Din;
 
 	Wrl  <= '1' when (CurrentState = STATE_WRITE) else '0';

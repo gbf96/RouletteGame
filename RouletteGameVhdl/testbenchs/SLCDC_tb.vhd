@@ -65,16 +65,14 @@ begin
 
     stim_proc : process
     begin
-        -- Reset inicial
+	 
         RESET <= '1';
         wait for 2 * CLK_PERIOD;
         RESET <= '0';
         wait for 2 * CLK_PERIOD;
-
-        -- Começar transmissão: baixar notSS
+       
         notSS <= '0'; wait for SCLK_PERIOD;
-        
-        -- Enviar 5 bits via SDX, sincronizados com SCLK
+
         SDX <= '1'; wait for SCLK_PERIOD;
         SDX <= '0'; wait for SCLK_PERIOD;
         SDX <= '1'; wait for SCLK_PERIOD;
@@ -82,19 +80,18 @@ begin
         SDX <= '1'; wait for SCLK_PERIOD;
 		  SDX <= '0'; wait for SCLK_PERIOD;
 
-        -- Terminar transmissão: levantar notSS
         notSS <= '1';
         
         wait for 10 * SCLK_PERIOD;
 
-        -- Segunda transmissão
+        -- Segunda transmissão(inválida)
         notSS <= '0'; wait for SCLK_PERIOD;
 
         SDX <= '0'; wait for SCLK_PERIOD;
         SDX <= '1'; wait for SCLK_PERIOD;
         SDX <= '0'; wait for SCLK_PERIOD;
         SDX <= '1'; wait for SCLK_PERIOD;
-        SDX <= '1'; wait for SCLK_PERIOD;
+        SDX <= '0'; wait for SCLK_PERIOD;
 		  SDX <= '0'; wait for SCLK_PERIOD;
 
         notSS <= '1';

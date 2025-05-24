@@ -30,6 +30,7 @@ BEGIN
 Q0 <= Data xor Q1;
 
 
+
  FFD0: FFD port map(
  CLK => CLK,
  D => Q0,

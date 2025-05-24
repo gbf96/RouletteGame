@@ -131,12 +131,12 @@ Counter_inst: Counter port map(
 	Q => Qout
 );
 
-Is5_inst: Is8 port map(
+Is8_inst: Is8 port map(
 	input => Qout,
 	S => is8sig
 );
 
-Is6_inst: Is9 port map(
+Is9_inst: Is9 port map(
 	input => Qout,
 	S => is9sig
 );

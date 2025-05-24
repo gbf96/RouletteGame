@@ -2,11 +2,13 @@ import isel.leic.UsbPort
 import isel.leic.utils.Time
 
 fun main() {
-    KBD.init()
-    LCD.init()
-    LCD.write("Roulette game")
-    RouletteDisplay.off(false)
-    RouletteDisplay.setValue(0x03)
-
-
+    RouletteGame.init()
+    RouletteGame.mainMenu()
+    while (true){
+        val x = TUI.readKey()
+        if (x == '*'){
+            TUI.printTextLeft("Creditos:",1)
+            RouletteGame.sort(5)
+        }
+    }
 }

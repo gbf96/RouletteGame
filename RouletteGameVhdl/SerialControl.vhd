@@ -24,44 +24,44 @@ signal CurrentState, NextState : STATE_TYPE;
 
 begin
 
--- Flip-Flop's 
 CurrentState <= STATE_OFF when RESET = '1' else NextState when rising_edge(clk);
 
--- Generate Next State 
 GenerateNextState:
 process (CurrentState, enRX, dFlag, pFlag, RXerror, accept)
-	begin
-		case CurrentState is
-			when STATE_OFF		=>	if (enRX = '0') then 
-												NextState <= STATE_WRITE;
-											else 
-												NextState <= STATE_OFF;
-											end if;
-											
-			when STATE_WRITE	=>	if (dFlag = '1') then 
-												NextState <= STATE_WRITE_OFF;
-											else 
-												NextState <= STATE_WRITE;
-											end if;
-											
-			when STATE_WRITE_OFF		=>	if (pFlag = '0') then
-													NextState <= STATE_WRITE_OFF;
-												elsif (pFlag = '1' and RXerror = '0')then
-													NextState <= STATE_OFF;
-												else
-													NextState <= STATE_WAIT;
-												end if;
-												
-			when STATE_WAIT	=>	if (accept = '1' and enRX = '1') then 
-												NextState <= STATE_OFF;
-											else 
-												NextState <= STATE_WAIT;
-											end if;
-											
-		end case;
-	end process;
-	
--- Generate outputs
+begin
+    case CurrentState is
+        when STATE_OFF =>
+            if (enRX = '0') then 
+                NextState <= STATE_WRITE;
+            else 
+                NextState <= STATE_OFF;
+            end if;
+
+        when STATE_WRITE =>
+            if (dFlag = '1') then 
+                NextState <= STATE_WRITE_OFF;
+            else 
+                NextState <= STATE_WRITE;
+            end if;
+
+        when STATE_WRITE_OFF =>
+            if (pFlag = '0') then
+                NextState <= STATE_WRITE_OFF;
+            elsif (pFlag = '1' and RXerror = '0') then
+                NextState <= STATE_OFF;
+            else
+                NextState <= STATE_WAIT;
+            end if;
+
+        when STATE_WAIT =>
+            if (accept = '1' and enRX = '1') then 
+                NextState <= STATE_OFF;
+            else 
+                NextState <= STATE_WAIT;
+            end if;
+    end case;
+end process;
+
 init <= '1' when (CurrentState = STATE_OFF and  enRX = '0') else '0';
 		
 wr <= '1' when (CurrentState = STATE_WRITE and dFlag = '0') else '0';

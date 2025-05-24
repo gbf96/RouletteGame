@@ -7,7 +7,6 @@ end entity;
 
 architecture testbench of SerialReceiver_tb is
 
-    -- Declaração dos componentes sem o uso de "work"
     component SerialReceiver
         port(
             SDX      : in std_logic;
@@ -78,44 +77,41 @@ architecture testbench of SerialReceiver_tb is
         );
     end component;
 
-    -- Sinais de entrada e saída para o SerialReceiver
-    signal SDX      : std_logic ;  -- Dados serializados (entrada de dados)
-    signal SCLK     : std_logic; -- Clock
-    signal notSS    : std_logic ;   -- Sinal de seleção do escravo (ativo baixo)
-    signal accept   : std_logic ;  -- Sinal para aceitar dados
-    signal RESET    : std_logic ;  -- Reset
-    signal D        : std_logic_vector(4 downto 0);  -- Dados recebidos
-    signal DXval    : std_logic;          -- Indica se os dados estão prontos
+    signal SDX      : std_logic ;  
+    signal SCLK     : std_logic; 
+    signal notSS    : std_logic ;   
+    signal accept   : std_logic ;  
+    signal RESET    : std_logic ; 
+    signal D        : std_logic_vector(4 downto 0);  
+    signal DXval    : std_logic;          -
 
-    -- Sinais internos
     signal wrout    : std_logic;
     signal initout  : std_logic;
     signal Errout   : std_logic;
     signal Qout     : std_logic_vector(2 downto 0);
-    signal bx       : std_logic_vector(2 downto 0) := "000";  -- Contador para controle
+    signal bx       : std_logic_vector(2 downto 0) := "000"; 
     signal is5sig   : std_logic;
     signal is6sig   : std_logic;
 
-    constant CLK_PERIOD : time := 10 ns;  -- Periodo do clock
+    constant CLK_PERIOD : time := 10 ns;  
 
 begin
 
-    -- Instancia o componente SerialReceiver
+ 
     SerialReceiver_inst: SerialReceiver
     port map (
         SDX      => SDX,
         SCLK     => SCLK,
-        notSS    => notSS,   -- Controle da recepção dos dados (notSS = '0' permite)
+        notSS    => notSS,  
         accept   => accept,
         RESET    => RESET,
         D        => D,
         DXval    => DXval
     );
-
-    -- Instancia o SerialControl
+	 
     SerialControl_inst: SerialControl
     port map (
-        enRX     => notSS,  -- Habilita o recebimento de dados quando notSS = 0
+        enRX     => notSS,  
         dFlag    => is5sig,
         pFlag    => is6sig,
         RXerror  => Errout,
@@ -127,7 +123,6 @@ begin
         DXval    => DXval
     );
 
-    -- Instancia o ParityCheck
     ParityCheck_inst: ParityCheck
     port map (
         CLK      => SCLK,
@@ -136,7 +131,6 @@ begin
         Err      => Errout
     );
 
-    -- Instancia o ShiftRegister
     ShiftRegister_inst: ShiftRegister
     port map (
         CLK         => SCLK,
@@ -145,7 +139,6 @@ begin
         D           => D
     );
 
-    -- Instancia o Counter3
     Counter3_inst: Counter3
     port map (
         CLK    => SCLK,
@@ -156,21 +149,18 @@ begin
         Q      => Qout
     );
 
-    -- Instancia o Is5
     Is5_inst: Is5
     port map (
         input => Qout,
         S     => is5sig
     );
 
-    -- Instancia o Is6
     Is6_inst: Is6
     port map (
         input => Qout,
         S     => is6sig
     );
 
-    -- Geração do sinal de clock (50 MHz, por exemplo)
     clk_gen: process
     begin
         while now < 2000 ns loop
@@ -182,10 +172,9 @@ begin
         wait;
     end process;
 
-    -- Processo de estímulo para o testbench
     stimulus: process
     begin
-        -- Reset do sistema
+	 
         RESET <= '1'; 
         wait for 20 ns;
         RESET <= '0'; 
@@ -194,52 +183,49 @@ begin
 		  SDX <= '0';
         wait for 20 ns;
         
-        -- Teste 1: Pressionar primeira tecla (notSS = '0', dados sendo recebidos)
-        notSS <= '0';  -- Início da recepção de dados
+        -- dado inválido
+        notSS <= '0'; 
 		  wait for CLK_PERIOD;
-        SDX <= '1';    -- Envia dado 1
+        SDX <= '1';   
         wait for CLK_PERIOD;
-        SDX <= '0';    -- Envia dado 0
+        SDX <= '0';    
         wait for CLK_PERIOD;
-        SDX <= '1';    -- Envia dado 1
+        SDX <= '1';   
         wait for CLK_PERIOD;
-        SDX <= '0';    -- Envia dado 0
+        SDX <= '0';    
         wait for CLK_PERIOD;
-		  SDX <= '0';    -- Envia dado 0
+		  SDX <= '0';    
         wait for CLK_PERIOD;
-		  SDX <= '0';    -- Envia dado 1
+		  SDX <= '0';    
         wait for CLK_PERIOD;
         
-        -- Finaliza a recepção (notSS = '1', não há mais dados a serem recebidos)
+     
         notSS <= '1';
-        wait for 20 ns;  -- Aguarda um tempo para a transição
+        wait for 20 ns;  
 		  accept <= '1'; 
         wait for 20 ns;
         
-        -- Teste 2: Enviar novos dados (para simular a continuidade)
-        notSS <= '0';  -- Inicia a recepção novamente
+		  --dado válido
+        notSS <= '0';  
 		  wait for CLK_PERIOD;
-        SDX <= '1';    -- Envia dado 1
+        SDX <= '1';  
         wait for CLK_PERIOD;
-        SDX <= '1';    -- Envia dado 1
+        SDX <= '1';   
         wait for CLK_PERIOD;
-        SDX <= '0';    -- Envia dado 0
+        SDX <= '0';   
         wait for CLK_PERIOD;
-        SDX <= '1';    -- Envia dado 1
+        SDX <= '1';    
         wait for CLK_PERIOD;
-		  SDX <= '1';    -- Envia dado 1
+		  SDX <= '1';    
         wait for CLK_PERIOD;
-		  SDX <= '1';    -- Envia dado 1
+		  SDX <= '1';    
         wait for CLK_PERIOD;
-        
-        
-        -- Finaliza a recepção (notSS = '1', não há mais dados a serem recebidos)
+                
         notSS <= '1';
         wait for 20 ns;
 		  accept <= '1'; 
         wait for 20 ns;
 
-        -- Finaliza o testbench
         wait;
     end process;
 

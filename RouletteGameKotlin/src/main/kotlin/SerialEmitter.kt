@@ -27,6 +27,8 @@ object SerialEmitter {
             Destination.ROULETTE -> RD_SEL
         }
         HAL.clrBits(destiny)
+
+        //Comentar estas duas linhas de clk para simulação.
         HAL.clrBits(SCLK_MASK)
         HAL.setBits(SCLK_MASK)
 
@@ -53,8 +55,5 @@ object SerialEmitter {
         HAL.setBits(SCLK_MASK)
         HAL.clrBits(SCLK_MASK)
         HAL.setBits(SCLK_MASK)
-
-
-
     }
 }

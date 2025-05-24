@@ -78,14 +78,12 @@ component UsbPort
 	);
 END component;
 
-component clkDIV
-port ( clk_in: in std_logic;
-		 clk_out: out std_logic);
-end component;
-
-component CLKDIV2
-port ( clk_in: in std_logic;
-		 clk_out: out std_logic);
+component CLKDIV
+    generic (div: natural := 50000);
+    port (
+        clk_in: in std_logic;
+        clk_out: out std_logic
+    );
 end component;
 
 signal Qout: std_logic_vector(3 downto 0);
@@ -147,15 +145,19 @@ RouletteDisplay_inst: RouletteDisplay port map(
 	HEX5 => HEX5	
 );
 
-clkDIV_inst: clkDIV port map(
-	clk_in => CLK,
-	clk_out => clkOUT
-);
+clkDIV_inst1: CLKDIV
+    generic map (div => 50000)
+    port map (
+        clk_in => CLK,
+        clk_out => clkOUT
+    );
 
-clkDIV_inst2: CLKDIV2 port map(
-	clk_in => CLK,
-	clk_out => clkOUT2
-);
+clkDIV_inst2: CLKDIV
+    generic map (div => 12)
+    port map (
+        clk_in => CLK,
+        clk_out => clkOUT2
+    );
 
 
 UsbPort_inst: UsbPort port map(

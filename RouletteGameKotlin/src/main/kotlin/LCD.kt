@@ -13,7 +13,7 @@ object LCD {
     private const val DISPLAY_OFF = 0x08
     private const val DISPLAY_CLR = 0x01
     private const val ENTRY_MODE = 0x06
-    private const val DISPLAY_CURSOR_ON = 0x0F
+    private const val DISPLAY_ON = 0x0C
 
     // Dimensao do display.
     private const val LINES = 2
@@ -71,7 +71,7 @@ object LCD {
         writeCMD(DISPLAY_OFF)
         writeCMD(DISPLAY_CLR)
         writeCMD(ENTRY_MODE)
-        writeCMD(DISPLAY_CURSOR_ON)
+        writeCMD(DISPLAY_ON)
     }
 
     // Escreve um carater na posicao corrente.
