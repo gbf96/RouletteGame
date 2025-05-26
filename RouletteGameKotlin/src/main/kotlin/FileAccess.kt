@@ -22,3 +22,11 @@ fun fileToArray(fileName: String): Array<String> {
     reader.close()
     return lines
 }
+
+fun writeFile(array: Array<String>, fileName: String) {
+    val writer = createWriter(fileName)
+    array.forEach {
+        writer.println(it)
+    }
+    writer.close()
+}
