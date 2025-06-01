@@ -29,8 +29,8 @@ object SerialEmitter {
         HAL.clrBits(destiny)
 
         //Comentar estas duas linhas de clk para simulação.
-        HAL.clrBits(SCLK_MASK)
-        HAL.setBits(SCLK_MASK)
+        //HAL.clrBits(SCLK_MASK)
+        //HAL.setBits(SCLK_MASK)
 
         var numOfOnes = 0
 

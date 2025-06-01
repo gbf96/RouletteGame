@@ -19,6 +19,45 @@ object RouletteDisplay {
         Time.sleep(120)
     }
 
+    fun toRoulette(str: String, complete: Char = ' ') {
+        val map = mapOf(
+            '0' to 0x00,
+            '1' to 0x01,
+            '2' to 0x02,
+            '3' to 0x03,
+            '4' to 0x04,
+            '5' to 0x05,
+            '6' to 0x06,
+            '7' to 0x07,
+            '8' to 0x08,
+            '9' to 0x09,
+            'A' to 0x0A,
+            'B' to 0x0B,
+            'C' to 0x0C,
+            'D' to 0x0D,
+            'E' to 0x0E,
+            'F' to 0x0F,
+            '-' to 0x10,
+            ' ' to 0x1F,
+            ',' to 0x12, //Upper-left
+            ';' to 0x11, //Upper-right
+            '.' to 0x15, //Down-right
+            ':' to 0x14, //Down-left
+            '_' to 0x18  //maintenance
+        )
+        val trimmed = str.takeLast(6).padStart(6, complete)
+        var word = 0
+
+        for (i in 0..5) {
+            val char = trimmed[i].uppercaseChar()
+            val valor5Bits = map[char] ?: throw IllegalArgumentException("Comando '$char' não encontrado no mapa.")
+            val shiftAmount = (5 - i) * 5
+            word = word or (valor5Bits shl shiftAmount)
+        }
+
+        setValue(word)
+    }
+
     // Envia comando para atualizar o valor do mostrador da roleta
     fun setValue(value : Int) {
         var v = value

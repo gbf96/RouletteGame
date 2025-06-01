@@ -34,9 +34,7 @@ process (CurrentState, Kack, Kpress)
 												NextState <= STATE_SCAN;
 											end if;
 											
-			when STATE_PROCESS	=>	if (Kpress = '0') then 
-												NextState <= STATE_SCAN;
-											elsif (Kack = '1') then
+			when STATE_PROCESS	=>	if (Kack = '1') then
 												NextState <= STATE_WAIT;
 											else
 												NextState <= STATE_PROCESS;
