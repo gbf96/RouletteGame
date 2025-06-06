@@ -113,6 +113,8 @@ object App {
                 if (k == '5'){
                     stats.saveToFile()
                     count.saveToFile()
+                    TUI.clearDisplay()
+                    RouletteDisplay.off(true)
                     exitProcess(0)
                 }else{
                     maintenanceMode()
@@ -127,25 +129,38 @@ object App {
         TUI.clearDisplay()
         TUI.printTextMiddle("0123456789ABCD",1)
         val savedCredits = credits
+        var rollTimeout: Timeout? = null
+        var animation = false
+        val roulette = arrayOf(',',';','.',':')
+        var i = 0
         if (!recordStats) {
             credits = 100
         }
         if (recordStats) count.incrementGames()
         RouletteDisplay.toRoulette("$credits")
         while (true) {
-            val key = KBD.waitKey(500)
+            val key = KBD.waitKey(150)
 
-            if (key == '#' && bets.sum() != 0) {
-                sort(random.nextInt(10))
+            if (rollTimeout?.isExpired() == true){
                 break
             }
 
+            if (key == '#' && bets.sum() != 0) {
+                animation = true
+                rollTimeout = Timeout(random.nextInt(10000).toLong())
+            }
+
+            if(animation){
+                i %= 4
+                RouletteDisplay.toRoulette("$credits", roulette[i])
+                i++
+            }
             val idx = keyToIndex(key) ?: continue
 
             if (bets[idx] < 9 && credits > 0) {
                 val currentBet = ++bets[idx]
                 credits--
-                RouletteDisplay.toRoulette("$credits")
+                if (!animation) RouletteDisplay.toRoulette("$credits")
                 TUI.printText("$currentBet",0,idx+1 )
             }
         }
@@ -159,18 +174,19 @@ object App {
             val amountWon = betsOnSorted * 2
             credits += amountWon
             stats.registerDraw(sortedIdx, amountWon)
-            RouletteDisplay.toRoulette("$sortedKey $amountWon")
+            val str = fillToSix("$sortedKey","$amountWon", '_')
+            RouletteDisplay.toRoulette(str)
         } else {
             stats.registerDraw(sortedIdx)
             val totalLost = bets.sum()
-            RouletteDisplay.toRoulette("$sortedKey-$totalLost")
+            val str = fillToSix("$sortedKey","$totalLost", '-')
+            RouletteDisplay.toRoulette(str)
         }
+        Time.sleep(5000)
         if (!recordStats) {
             credits = savedCredits
         }
     }
-
-
 
     private fun gameMenu(){
         TUI.clearDisplay()
@@ -223,22 +239,20 @@ object App {
         count.loadFromFile()
     }
 
-    fun sort(time: Int){
-        val sec = time *2
-        for (i in 0..sec){
-            RouletteDisplay.animation()
-        }
-    }
-
     private fun keyToIndex(key: Char): Int? = when (key) {
         in '0'..'9' -> key - '0'
         in 'A'..'D' -> key - 'A' + 10
         else        -> null
     }
 
-    private fun indexToKey(index: Int): Char =
-        if (index < 10) ('0' + index)
-        else ('A' + (index - 10))
+    private fun indexToKey(index: Int): Char = if (index < 10) ('0' + index) else ('A' + (index - 10))
+
+    private fun fillToSix(left: String, right: String, filler: Char): String {
+        val count = 6 - (left.length + right.length)
+        val str = filler.toString().repeat(count)
+        return left + str + right
+    }
+
 
     private fun showStatisticsScreen(screen: Int) {
         val index0 = screen * 2

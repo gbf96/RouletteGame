@@ -10,13 +10,13 @@ object RouletteDisplay {
     // Realiza a animacaoo do sorteio
     fun animation(){
         setValue(0b10010_10010_10010_10010_10010_10010)
-        Time.sleep(120)
+
         setValue(0b10001_10001_10001_10001_10001_10001)
-        Time.sleep(120)
+
         setValue(0b10101_10101_10101_10101_10101_10101)
-        Time.sleep(120)
+
         setValue(0b10100_10100_10100_10100_10100_10100)
-        Time.sleep(120)
+
     }
 
     fun toRoulette(str: String, complete: Char = ' ') {

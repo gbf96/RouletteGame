@@ -9,7 +9,11 @@ entity RouletteGame is
 	CLK: in std_logic;
 	LCD_CMD: out std_logic_vector(4 downto 0);
 	LCD_EN: out std_logic;
+	accept: out std_logic;
 	RESET   : in std_logic;
+	M : in std_logic;
+	Coin : in std_logic;
+	CoinId : in std_logic;
 	HEX0	: out std_logic_vector(7 downto 0);
 	HEX1	: out std_logic_vector(7 downto 0);
 	HEX2	: out std_logic_vector(7 downto 0);
@@ -70,6 +74,16 @@ port(	set	: in std_logic;
 		);
 end component;
 
+component CoinAcceptor
+port(	
+	accept:   in std_logic;
+	Coin  : in std_logic;
+	clk   : in std_logic;
+	RESET : in std_logic;
+	CoinOut  : out std_logic
+);
+end component;
+
 component UsbPort 
 	PORT
 	(
@@ -96,6 +110,8 @@ signal SCLK: std_logic;
 signal LCDsel: std_logic;
 signal RDsel: std_logic;
 signal setSIG: std_logic;
+signal coinSIG: std_logic;
+signal acceptSIG: std_logic;
 signal RD_dataSIG: std_logic_vector(4 downto 0);
 signal RD_cmdSIG: std_logic_vector(2 downto 0);
     
@@ -145,6 +161,14 @@ RouletteDisplay_inst: RouletteDisplay port map(
 	HEX5 => HEX5	
 );
 
+CoinAcceptor_inst: CoinAcceptor port map(
+	clk => CLK,
+	RESET => RESET,
+	CoinOut => CoinSIG,
+   Coin => Coin,
+	accept => acceptSIG	
+);
+
 clkDIV_inst1: CLKDIV
     generic map (div => 50000)
     port map (
@@ -163,12 +187,18 @@ clkDIV_inst2: CLKDIV
 UsbPort_inst: UsbPort port map(
 	inputPort(3 downto 0) => Qout(3 downto 0),
 	inputPort(4) => Dvalout,
+	inputPort(5) => CoinId,
+	inputPort(6) => CoinSIG,
+	inputPort(7) => M,
 	outputPort(0) => LCDsel,
 	outputPort(1) => RDsel,
 	outputPort(3) => SDX,
 	outputPort(4) => SCLK,
+	outputPort(6) => acceptSIG,
 	outputPort(7) => ACKout
 	
 );
+
+accept <= acceptSIG;
 
 end structural;
