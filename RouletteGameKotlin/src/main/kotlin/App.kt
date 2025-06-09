@@ -68,7 +68,10 @@ object App {
         }
 
         when (key) {
-            '*' -> rouletteGame(false)
+            '*' -> {
+                rouletteGame(false)
+                maintenanceMode()
+            }
             'A' -> {
                 TUI.clearDisplay()
                 TUI.printTextLeft("Games:${count.games}", 0)
@@ -172,12 +175,14 @@ object App {
         showNumber(sortedIdx)
         if (betsOnSorted > 0) {
             val amountWon = betsOnSorted * 2
-            credits += amountWon
-            stats.registerDraw(sortedIdx, amountWon)
+            if(recordStats) {
+                credits += amountWon
+                stats.registerDraw(sortedIdx, amountWon)
+            }
             val str = fillToSix("$sortedKey","$amountWon", '_')
             RouletteDisplay.toRoulette(str)
         } else {
-            stats.registerDraw(sortedIdx)
+            if (recordStats) stats.registerDraw(sortedIdx)
             val totalLost = bets.sum()
             val str = fillToSix("$sortedKey","$totalLost", '-')
             RouletteDisplay.toRoulette(str)
